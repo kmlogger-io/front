@@ -4,10 +4,10 @@ import { TextField, InputAdornment, IconButton, TextFieldProps } from '@mui/mate
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import InputMask from 'react-input-mask';
 
-interface BaseTextFieldProps<T extends FieldValues> {
+interface BaseTextFieldProps<T = any> {
   name: Path<T>;
-  control: Control<T>;
-  label: string;
+  control: any; 
+  label?: string;
   type?: 'text' | 'password' | 'email' | 'number' | 'tel';
   mask?: string;
   disabled?: boolean;
@@ -22,6 +22,7 @@ interface BaseTextFieldProps<T extends FieldValues> {
   multiline?: boolean;
   rows?: number;
   InputProps?: TextFieldProps['InputProps'];
+  zodField?: any; 
   [key: string]: any;
 }
 
@@ -43,6 +44,7 @@ export function BaseTextField<T extends FieldValues>({
   multiline,
   rows,
   InputProps,
+  zodField,
   ...rest
 }: BaseTextFieldProps<T>) {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,14 +53,27 @@ export function BaseTextField<T extends FieldValues>({
 
   const inputType = type === 'password' ? (showPassword ? 'text' : 'password') : type;
 
+  let inputPropsFromSchema: any = {};
+  if (zodField) {
+    if (zodField._def.mask) {
+      rest.mask = zodField._def.mask;
+    }
+    if (zodField._def.checks) {
+      const max = zodField._def.checks.find((c: any) => c.kind === 'max');
+      if (max) inputPropsFromSchema.maxLength = max.value;
+      const pattern = zodField._def.checks.find((c: any) => c.kind === 'regex');
+      if (pattern) inputPropsFromSchema.pattern = pattern.regex.source;
+    }
+  }
+
   return (
     <Controller
       name={name}
       control={control}
       rules={rules}
       render={({ field, fieldState }) =>
-        mask ? (
-          <InputMask mask={mask} value={field.value || ''} onChange={field.onChange}>
+        rest.mask ? (
+          <InputMask mask={rest.mask} value={field.value || ''} onChange={field.onChange}>
             {(inputProps: any) => (
               <TextField
                 {...inputProps}
@@ -89,6 +104,10 @@ export function BaseTextField<T extends FieldValues>({
                       borderColor: 'var(--cor-primaria)',
                     },
                   },
+                }}
+                inputProps={{
+                  ...inputPropsFromSchema,
+                  ...rest.inputProps,
                 }}
                 {...rest}
               />
@@ -138,6 +157,10 @@ export function BaseTextField<T extends FieldValues>({
                   borderColor: 'var(--cor-primaria)',
                 },
               },
+            }}
+            inputProps={{
+              ...inputPropsFromSchema,
+              ...rest.inputProps,
             }}
             {...rest}
           />

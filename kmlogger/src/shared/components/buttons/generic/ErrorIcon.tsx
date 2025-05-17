@@ -2,7 +2,7 @@ import { Error } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { Box } from '@mui/material';
 
-export default function IconeFalha() {
+export default function ErrorIcon() {
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
