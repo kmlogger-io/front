@@ -16,7 +16,6 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
     line-height: 1.5;
     text-transform: none;
     letter-spacing: 0.5px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--button-primary);
     color: var(--button-primary-text);
     box-shadow: var(--shadow-md);
@@ -31,7 +30,6 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
       transition: left 0.6s ease;
     }
     
@@ -94,10 +92,6 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
       }
     }
     
-    &:focus {
-      outline: none;
-      box-shadow: var(--shadow-primary-lg), var(--input-shadow-focus);
-    }
     
     &:active:not(:disabled) {
       transform: translateY(0);

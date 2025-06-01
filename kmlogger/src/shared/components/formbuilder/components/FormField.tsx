@@ -7,6 +7,7 @@ import type { CharacterLimit, FormattingMode, InputSize, InputType } from '../..
 interface FormFieldProps<T extends FieldValues> extends Omit<TextFieldProps, 'name' | 'value' | 'onChange' | 'error'> {
   name: FieldPath<T>;
   control?: Control<T>;
+  label?: string | React.ReactElement; // Especificar o tipo do label
   InputType?: InputType;
   FormattingMode?: FormattingMode
   InputSize?: InputSize
@@ -17,6 +18,7 @@ interface FormFieldProps<T extends FieldValues> extends Omit<TextFieldProps, 'na
 export function FormField<T extends FieldValues>({
   name,
   control,
+  label,
   ...textFieldProps
 }: FormFieldProps<T>) {
   const {
@@ -30,7 +32,7 @@ export function FormField<T extends FieldValues>({
     <>
     <Input
       {...textFieldProps}
-      label={name}
+      label={label || name.toString()}
       value={value || ''}
       onInput={onChange}
       tabIndex={0}

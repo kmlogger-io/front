@@ -5,8 +5,8 @@ export function Logo() {
       alt="Logo" 
       style={{ 
         width: '100%',
-        maxWidth: '200px', 
-        height: 'auto'
+        maxWidth: '300px', 
+        height: '10rem'
       }} 
     />
   );

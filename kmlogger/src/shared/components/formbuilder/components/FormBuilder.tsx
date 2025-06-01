@@ -48,43 +48,44 @@ export function FormBuilder<T extends FieldValues>({
         <LogoContainer>
           <Logo />
         </LogoContainer>
-
-        <Box sx={{ textAlign: 'center' }}>
-          <Typography
-            variant="h3"
-            component="h1"
-            sx={{
-              fontWeight: 700,
-              color: 'var(--text-primary)',
-              fontSize: { xs: '2rem', sm: '2.5rem' },
-              letterSpacing: '-0.02em',
-              mb: 1,
-              background: 'linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            {title}
-          </Typography>
-
-          <Typography
-            variant="body1"
-            sx={{
-              color: 'var(--text-secondary)',
-              fontSize: '1rem',
-              fontWeight: 400,
-              maxWidth: 300,
-              lineHeight: 1.6,
-            }}
-          >
-           {subTitle}
-          </Typography>
-        </Box>
       </HeaderSection>
-
       <FormProvider {...formMethods}>
         <FormCard as="form" onSubmit={onSubmitHandler} className={className}>
+            <Box sx={{ textAlign: 'center' }}>
+            <Typography
+              variant="h3"
+              component="h1"
+              sx={{
+                fontWeight: 700,
+                color: 'var(--text-primary)',
+                fontSize: { xs: '2rem', sm: '2.5rem' },
+                letterSpacing: '-0.02em',
+                mb: 1,
+                background: 'linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              {title}
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                color: 'var(--text-secondary)',
+                fontSize: '1rem',
+                fontWeight: 400,
+                maxWidth: 300,
+                lineHeight: 1.6,
+                margin: '0 auto',
+                textAlign: 'center',
+                marginBottom: 1,
+              }}
+            >
+            {subTitle}
+            </Typography>
+          </Box>
           {children}
           {showSubmitButton && (
             <Box sx={{ mt: 2, pt: 1, width: '100%' }}>

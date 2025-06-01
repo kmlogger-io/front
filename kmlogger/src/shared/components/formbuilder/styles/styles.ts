@@ -5,7 +5,6 @@ export const FormContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4rem;
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
@@ -18,8 +17,7 @@ export const HeaderSection = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
-  margin-bottom: 1rem;
+  text-align: center;
 `;
 
 export const LogoContainer = styled(Box)`
@@ -28,10 +26,8 @@ export const LogoContainer = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
 
   & img {
-    width: 160px;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
@@ -41,15 +37,15 @@ export const LogoContainer = styled(Box)`
 export const FormCard = styled(Box)`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1rem;
   width: 100%;
   background: var(--background-card);
   padding: 2rem;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: var(--shadow-xl);
   border: 1px solid var(--border);
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 
   &::before {
     content: '';
@@ -74,10 +70,12 @@ export const FormCard = styled(Box)`
 `;
 
 export const ExtraLinks = styled(Box)`
-  margin-top: 4rem;
+  margin-top: 1rem;
   padding-top: 3rem;
   border-top: 1px solid var(--border);
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 3rem;

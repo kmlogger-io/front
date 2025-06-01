@@ -4,10 +4,10 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
     :root{
     /* Primary Pink Theme - Professional Palette */
-    --primary: #e91e63;
-    --primary-hover: #c2185b;
-    --primary-light: #f8bbd9;
-    --primary-dark: #ad1457;
+    --primary: #AB47BC;
+    --primary-hover:rgb(168, 82, 184);
+    --primary-light:rgb(171, 102, 184);
+    --primary-dark:rgb(158, 23, 182);
     --primary-subtle: rgba(233, 30, 99, 0.1);
     
     /* Dark Professional Background */
@@ -18,10 +18,10 @@ export const GlobalStyle = createGlobalStyle`
     --background-input: #2a2a2c;
     
     /* Text Colors */
-    --text-primary: #ffffff;
+    --text-primary: #AB47BC;
     --text-secondary: #b3b3b3;
     --text-muted: #666666;
-    --text-inverse: #000000;
+    --text-inverse:rgb(68, 63, 63);
     --text-error: #ff6b6b;
     --text-success: #51cf66;
     

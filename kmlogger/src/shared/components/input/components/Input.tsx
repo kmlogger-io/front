@@ -6,7 +6,6 @@ import {
   StyledTextFieldSmall, 
   StyledTextFieldLarge,
   InputContainer,
-  CharacterCounter,
 } from "../styles/styles"
 
 interface InputProps{
@@ -58,6 +57,9 @@ export function Input(props: InputProps) {
   }
   const StyledComponent = getStyledComponent()
 
+  const inputProps = props.CharacterLimit?.maximum
+    ? { maxLength: props.CharacterLimit.maximum }
+    : {};
   
   return(
     <InputContainer isFocused={isFocused} hasError={hasError} isValid={isValid}>
@@ -76,16 +78,8 @@ export function Input(props: InputProps) {
         inputRef={inputRef}
         variant="outlined"
         fullWidth
+        inputProps={inputProps} 
       />
-      
-      {props.CharacterLimit && (
-        <CharacterCounter 
-          isOverLimit={isOverLimit}
-          isNearLimit={isNearLimit}
-        >
-          {characterCount}/{props.CharacterLimit.maximum}
-        </CharacterCounter>
-      )}
     </InputContainer>
   )
 }

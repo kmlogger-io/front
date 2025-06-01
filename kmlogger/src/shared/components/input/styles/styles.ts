@@ -4,9 +4,9 @@ import { TextField } from '@mui/material';
 // Styled TextField base
 export const StyledTextField = styled(TextField)`
   && {
-    @apply w-full mb-4; /* Tailwind classes for width and margin-bottom */
+    width: 100%;
+    margin-bottom: 1rem; // Replaces @apply mb-4;
 
-    /* Remove o "X" do campo de input */
     .MuiInputBase-input::-webkit-search-cancel-button,
     .MuiInputBase-input::-webkit-clear-button,
     .MuiInputBase-input::-ms-clear {
@@ -15,68 +15,87 @@ export const StyledTextField = styled(TextField)`
     }
 
     .MuiOutlinedInput-root {
-      @apply rounded-lg bg-gray-100 text-gray-800 transition-all shadow-sm; /* Tailwind classes for border-radius, background, text color, and shadow */
+      border-radius: 0.5rem; // Replaces @apply rounded-lg;
+      background-color: var(--input-bg); // Replaces @apply bg-gray-100;
+      color: var(--text-primary); // Replaces @apply text-gray-800;
+      transition: all 0.3s ease-in-out; // Replaces @apply transition-all;
+      box-shadow: var(--shadow-sm); // Replaces @apply shadow-sm;
 
       .MuiOutlinedInput-notchedOutline {
-        @apply border-primary border-opacity-50 border-2; /* Tailwind classes for border color, opacity, and width */
+        border-color: var(--primary);
+        border-width: 2px; // Replaces @apply border-2;
+        opacity: 0.5; // Replaces @apply border-opacity-50;
       }
 
       &:hover:not(.Mui-focused) {
         .MuiOutlinedInput-notchedOutline {
-          @apply border-primary border-opacity-70 shadow-md; /* Tailwind classes for hover state */
+          border-color: var(--primary);
+          opacity: 0.7; // Replaces @apply border-opacity-70;
+          box-shadow: var(--shadow-md); // Replaces @apply shadow-md;
         }
       }
 
       &.Mui-focused {
-        @apply bg-white; /* Tailwind class for focused background */
+        background-color: var(--input-bg); // Replaces @apply bg-white;
         .MuiOutlinedInput-notchedOutline {
-          @apply border-primary border-2 shadow-lg; /* Tailwind classes for focused state */
+          border-color: var(--primary);
+          border-width: 2px; // Replaces @apply border-2;
+          opacity: 1; // Ensure full opacity on focus
+          box-shadow: var(--shadow-lg); // Replaces @apply shadow-lg;
         }
       }
 
       &.Mui-error {
         .MuiOutlinedInput-notchedOutline {
-          @apply border-red-500 shadow-lg; /* Tailwind classes for error state */
+          border-color: var(--error);
+          box-shadow: var(--shadow-lg); // Replaces @apply shadow-lg;
         }
       }
 
       &.Mui-disabled {
-        @apply bg-gray-200; /* Tailwind class for disabled background */
+        background-color: var(--background-tertiary); // Replaces @apply bg-gray-200;
         .MuiOutlinedInput-notchedOutline {
-          @apply border-gray-400; /* Tailwind class for disabled border */
+          border-color: var(--text-muted); 
         }
       }
 
       input {
-        @apply text-gray-800; /* Tailwind class for input text color */
+        color: var(--text-primary); // Replaces @apply text-gray-800;
 
         &::placeholder {
-          @apply text-gray-400 opacity-80; /* Tailwind classes for placeholder text */
+          color: var(--input-placeholder); // Replaces @apply text-gray-400;
+          opacity: 0.8; // Replaces @apply opacity-80;
         }
       }
     }
 
     .MuiInputLabel-root {
-      @apply text-gray-600 font-medium text-sm; /* Tailwind classes for label */
+      color: var(--text-secondary); // Replaces @apply text-gray-600;
+      font-weight: 500; // Replaces @apply font-medium;
+      font-size: 0.875rem; // Replaces @apply text-sm;
 
       &.Mui-focused {
-        @apply text-primary; /* Tailwind class for focused label */
+        color: var(--primary);
       }
 
       &.Mui-error {
-        @apply text-red-500; /* Tailwind class for error label */
+        color: var(--error);
       }
 
       &.Mui-disabled {
-        @apply text-gray-400; /* Tailwind class for disabled label */
+        color: var(--text-muted);
       }
     }
 
     .MuiFormHelperText-root {
-      @apply ml-0 mt-1 text-xs font-medium text-gray-400; /* Tailwind classes for helper text */
+      margin-left: 0; // Replaces @apply ml-0;
+      margin-top: 0.25rem; // Replaces @apply mt-1;
+      font-size: 0.75rem; // Replaces @apply text-xs;
+      font-weight: 500; // Replaces @apply font-medium;
+      color: var(--text-muted); // Replaces @apply text-gray-400;
 
       &.Mui-error {
-        @apply text-red-500; /* Tailwind class for error helper text */
+        color: var(--error);
       }
     }
   }
@@ -86,11 +105,12 @@ export const StyledTextField = styled(TextField)`
 export const StyledTextFieldSmall = styled(StyledTextField)`
   && {
     .MuiOutlinedInput-root {
-      @apply h-10 text-sm; /* Tailwind classes for height and font size */
+      height: 2.5rem; // Replaces @apply h-10;
+      font-size: 0.875rem; // Replaces @apply text-sm;
     }
 
     .MuiInputLabel-root {
-      @apply text-sm; /* Tailwind class for label font size */
+      font-size: 0.875rem; // Replaces @apply text-sm;
     }
   }
 `;
@@ -99,11 +119,12 @@ export const StyledTextFieldSmall = styled(StyledTextField)`
 export const StyledTextFieldLarge = styled(StyledTextField)`
   && {
     .MuiOutlinedInput-root {
-      @apply h-14 text-base; /* Tailwind classes for height and font size */
+      height: 3.5rem; // Replaces @apply h-14;
+      font-size: 1rem; // Replaces @apply text-base;
     }
 
     .MuiInputLabel-root {
-      @apply text-base; /* Tailwind class for label font size */
+      font-size: 1rem; // Replaces @apply text-base;
     }
   }
 `;
@@ -114,11 +135,8 @@ export const InputContainer = styled.div<{
   hasError?: boolean;
   isValid?: boolean;
 }>`
-  @apply relative w-full; /* Tailwind classes for container */
-
-  ${props => props.isFocused && `
-    @apply scale-105 transition-transform ease-in-out; /* Tailwind classes for focus state */
-  `}
+  position: relative; // Replaces @apply relative;
+  width: 100%; // Replaces @apply w-full;
 
   ${props => props.hasError && `
     animation: shake 0.3s ease-in-out;
@@ -127,7 +145,7 @@ export const InputContainer = styled.div<{
   ${props => props.isValid === false && `
     .MuiOutlinedInput-root {
       .MuiOutlinedInput-notchedOutline {
-        @apply border-red-500 !important; /* Tailwind class for invalid state */
+        border-color: var(--error) !important;
       }
     }
   `}
@@ -137,19 +155,4 @@ export const InputContainer = styled.div<{
     25% { transform: translateX(-4px); }
     75% { transform: translateX(4px); }
   }
-`;
-
-// Contador de caracteres
-export const CharacterCounter = styled.span<{ 
-  isOverLimit?: boolean;
-  isNearLimit?: boolean;
-}>`
-  @apply absolute bottom-[-20px] right-0 text-xs font-medium; /* Tailwind classes for position and text */
-  color: ${props => {
-    if (props.isOverLimit) return '#d32f2f';
-    if (props.isNearLimit) return '#ff9800';
-    return '#666';
-  }};
-
-  @apply transition-colors ease-in-out; /* Tailwind class for color transition */
 `;
