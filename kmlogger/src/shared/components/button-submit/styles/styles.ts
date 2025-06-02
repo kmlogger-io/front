@@ -30,17 +30,11 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
       left: -100%;
       width: 100%;
       height: 100%;
-      transition: left 0.6s ease;
     }
     
     &:hover:not(:disabled) {
       background: var(--button-primary-hover);
       box-shadow: var(--shadow-primary-lg);
-      transform: translateY(-2px);
-      
-      &::before {
-        left: 100%;
-      }
     }
     
     ${({ $state }) => {
@@ -84,8 +78,6 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
       color: var(--button-disabled-text);
       opacity: 0.8;
       cursor: not-allowed;
-      box-shadow: var(--shadow-xs);
-      transform: none;
       
       &::before {
         display: none;
@@ -96,6 +88,11 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
     &:active:not(:disabled) {
       transform: translateY(0);
       box-shadow: var(--shadow-sm);
+    }
+    
+    &:focus {
+      outline: none;
+      box-shadow: none;
     }
     
     .MuiLoadingButton-loadingIndicator {

@@ -7,7 +7,7 @@ import type { CharacterLimit, FormattingMode, InputSize, InputType } from '../..
 interface FormFieldProps<T extends FieldValues> extends Omit<TextFieldProps, 'name' | 'value' | 'onChange' | 'error'> {
   name: FieldPath<T>;
   control?: Control<T>;
-  label?: string | React.ReactElement; // Especificar o tipo do label
+  label?: string | React.ReactElement;
   InputType?: InputType;
   FormattingMode?: FormattingMode
   InputSize?: InputSize
@@ -30,23 +30,23 @@ export function FormField<T extends FieldValues>({
   });
   return (
     <>
-    <Input
-      {...textFieldProps}
-      label={label || name.toString()}
-      value={value || ''}
-      onInput={onChange}
-      tabIndex={0}
-      onBlur={onBlur}
-      error={!!error}
-      onFocus={textFieldProps.onFocus}
-      InputType={textFieldProps.InputType}
-      InputSize={textFieldProps.InputSize}
-      CharacterLimit={textFieldProps.CharacterLimit}
-      FormattingMode={textFieldProps.FormattingMode}
-      disabled={textFieldProps.disabled}
-      className={textFieldProps.className || ''}
-      helperText={error?.message}
-    />
+      <Input
+        {...textFieldProps}
+        label={label || name.toString()}
+        value={value || ''}
+        onInput={onChange}
+        tabIndex={0}
+        onBlur={onBlur}
+        error={!!error}
+        onFocus={textFieldProps.onFocus}
+        InputType={textFieldProps.InputType}
+        InputSize={textFieldProps.InputSize}
+        CharacterLimit={textFieldProps.CharacterLimit}
+        FormattingMode={textFieldProps.FormattingMode}
+        disabled={textFieldProps.disabled}
+        className={textFieldProps.className || ''}
+        helperText={error?.message}
+      />
     </>
   );
 }

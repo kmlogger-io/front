@@ -1,7 +1,13 @@
+import { Box } from "@mui/material";
+
 export function Copyright() {
     return (
-        <div style={{ textAlign: 'center', padding: '20px' , color: 'var(--text-primary)'}}>
+        <Box style={{ textAlign: 'center', padding: '20px', 
+            color: 'var(--text-primary)', 
+            position: 'fixed', 
+            bottom: '10px', 
+            width: '100%' }}>
             <span>© 2025 Kmlogger. All rights reserved.</span>
-        </div>
+        </Box>
     );
 }

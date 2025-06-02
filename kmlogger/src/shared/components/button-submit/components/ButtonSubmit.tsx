@@ -40,7 +40,9 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
       setSuccess,
       setError,
       reset
-    }));    const handleClick = async () => {
+    }));    
+    
+    const handleClick = async () => {
       if (disabled || isLoading) return;
       
       if (onClick) {
@@ -52,7 +54,9 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
           setError();
         }
       }
-    };    const getIcon = () => {
+    };
+
+    const getIcon = () => {
       switch (state) {
         case 'success':
           return (
@@ -108,7 +112,9 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
         default:
           return children;
       }
-    };    return (
+    };    
+    
+    return (
       <StyledButton
         onClick={handleClick}
         disabled={disabled}

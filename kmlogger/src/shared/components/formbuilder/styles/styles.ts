@@ -10,6 +10,7 @@ export const FormContainer = styled(Box)`
   margin: 0 auto;
   padding: 2rem;
   min-height: 100vh;
+  margin-top: 0;
   justify-content: center;
 `;
 

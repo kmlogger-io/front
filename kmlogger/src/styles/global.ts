@@ -5,8 +5,8 @@ export const GlobalStyle = createGlobalStyle`
     :root{
     /* Primary Pink Theme - Professional Palette */
     --primary: #AB47BC;
-    --primary-hover:rgb(168, 82, 184);
-    --primary-light:rgb(171, 102, 184);
+    --primary-hover: #AB47BC;
+    --primary-light: #AB47BC;
     --primary-dark:rgb(158, 23, 182);
     --primary-subtle: rgba(233, 30, 99, 0.1);
     

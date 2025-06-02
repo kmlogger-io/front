@@ -8,10 +8,23 @@ import { EMAIL_CHARACTER_LIMIT, PASSWORD_CHARACTER_LIMIT } from "../../../../../
 export function Login(){
     const { handleLogin } = useLogin();
 
-    const extraLinks = ['Sign Up', 'Forgot Password?', 'Help'];
+    const extraLinks = [
+        { name: 'Sign Up', path: '/sign-up' },
+        { name: 'Forgot Password?', path: '/forgot-password' },
+        { name: 'Help', path: '/help' },
+    ];
 
     return(
-        <Box sx={{ width: '100%', maxWidth: 600, margin: '0 auto', padding: 2 }}>
+        <Box sx={{ width: '100%',
+            maxWidth: 600,
+            margin: '0 auto', 
+            padding: 2, 
+            marginTop: 0 , 
+            height: '88vh', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'center' 
+            }}>
             <FormBuilder
                 title="Login"
                 schema={loginSchema}

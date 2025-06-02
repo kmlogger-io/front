@@ -8,6 +8,11 @@ import { ButtonSubmit } from '../../button-submit/components/ButtonSubmit';
 import { Logo } from '../../logo/components/Logo';
 import { FormContainer, HeaderSection, LogoContainer, FormCard, ExtraLinks } from '../styles/styles';
 
+interface ExtraLink {
+  name: string;
+  path: string;
+}
+
 interface FormBuilderProps<T extends FieldValues> {
   schema: ZodSchema<T>;
   onSubmit: (data: T) => void | Promise<void>;
@@ -15,7 +20,7 @@ interface FormBuilderProps<T extends FieldValues> {
   children: React.ReactNode;
   submitButtonText?: string;
   showSubmitButton?: boolean;
-  extralinks?: string[];
+  extralinks?: ExtraLink[];
   className?: string;
   title?: string;
   subTitle?: string;
@@ -40,7 +45,7 @@ export function FormBuilder<T extends FieldValues>({
     onSubmit,
   });
 
-  const { onSubmitHandler, isValid } = formMethods;
+  const { onSubmitHandler, isValid, handleNavigation } = formMethods;
 
   return (
     <FormContainer>
@@ -102,14 +107,17 @@ export function FormBuilder<T extends FieldValues>({
 
           {extralinks && (
             <ExtraLinks>
-              {extralinks.map((link: string, index: number) => (
+              {extralinks.map((link: ExtraLink, index: number) => (
                 <Typography
                   key={index}
                   component="a"
-                  href="#"
+                  onClick={() => handleNavigation(link.path)}
+                  sx={{
+                    cursor: 'pointer',
+                  }}
                   variant="body2"
                 >
-                  {link}
+                  {link.name}
                 </Typography>
               ))}
             </ExtraLinks>
