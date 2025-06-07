@@ -1,14 +1,15 @@
 import{ GlobalStyle } from "./styles/global";
 import { Router } from "./Router";
 import { BrowserRouter } from "react-router-dom";
+import { SnackbarProvider } from "./shared/contexts/SnackbarContext";
 
-export function App() {
+function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Router/>    
-      </BrowserRouter>
-      <GlobalStyle/>  
-    </>
-  )
+    <BrowserRouter>
+      <SnackbarProvider>
+        <GlobalStyle />
+        <Router />
+      </SnackbarProvider>
+    </BrowserRouter>
+  );
 }

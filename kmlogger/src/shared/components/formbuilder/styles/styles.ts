@@ -43,7 +43,6 @@ export const FormCard = styled(Box)`
   background: var(--background-card);
   padding: 2rem;
   border-radius: 6px;
-  box-shadow: var(--shadow-xl);
   border: 1px solid var(--border);
   position: relative;
   overflow: auto;

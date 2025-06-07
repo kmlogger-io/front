@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     --primary-subtle: rgba(233, 30, 99, 0.1);
     
     /* Dark Professional Background */
-    --background: #0a0a0b;
+    --background:rgb(30, 30, 32);
     --background-secondary: #1a1a1b;
     --background-tertiary: #2d2d30;
     --background-card: #1e1e20;
