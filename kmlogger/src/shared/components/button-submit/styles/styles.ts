@@ -22,7 +22,7 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
     border: none;
     position: relative;
     overflow: hidden;
-    
+   
     &::before {
       content: '';
       position: absolute;
@@ -31,12 +31,17 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
       width: 100%;
       height: 100%;
     }
-    
+
+    &.w-full {
+      width: 100%;
+      min-width: unset;
+    }
+   
     &:hover:not(:disabled) {
       background: var(--button-primary-hover);
       box-shadow: var(--shadow-primary-lg);
     }
-    
+   
     ${({ $state }) => {
       switch ($state) {
         case 'success':
@@ -72,33 +77,32 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
           return '';
       }
     }}
-    
+   
     &:disabled {
       background: var(--button-disabled);
       color: var(--button-disabled-text);
       opacity: 0.8;
       cursor: not-allowed;
-      
+     
       &::before {
         display: none;
       }
     }
-    
-    
+   
     &:active:not(:disabled) {
       transform: translateY(0);
       box-shadow: var(--shadow-sm);
     }
-    
+   
     &:focus {
       outline: none;
       box-shadow: none;
     }
-    
+   
     .MuiLoadingButton-loadingIndicator {
       color: white;
     }
-    
+   
     .MuiCircularProgress-root {
       color: rgba(255, 255, 255, 0.8);
     }
