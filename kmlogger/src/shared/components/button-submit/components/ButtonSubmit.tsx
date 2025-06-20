@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import LoginIcon from '@mui/icons-material/Login';
@@ -118,6 +118,7 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
       <StyledButton
         onClick={handleClick}
         disabled={disabled}
+        type='submit'
         loading={isLoading}
         variant={variant}
         color={color}

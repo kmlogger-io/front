@@ -1,5 +1,4 @@
-// contexts/SnackbarContext.tsx
-import React, { createContext, useState, type ReactNode } from 'react';
+import { createContext, useState, type ReactNode } from 'react';
 import type { ShowSnackbarOptions, SnackbarType } from '../hooks/useSnackbar.hook';
 import { Alert, Snackbar, type AlertProps } from '@mui/material';
 

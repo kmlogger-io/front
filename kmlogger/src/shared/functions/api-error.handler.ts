@@ -4,7 +4,7 @@ import type { ApiError, BaseResponse } from "../types/api-types.types";
 export const toEither = async <T>(apiCall: Promise<T>): Promise<Either<ApiError, BaseResponse<T>>> => {
   try {
     const response = await apiCall as BaseResponse<T>;
-    
+      
     if (response.statusCode >= 400) {
       return left({
         statusCode: response.statusCode,

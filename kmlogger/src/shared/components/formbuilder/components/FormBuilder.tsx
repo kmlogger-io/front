@@ -38,7 +38,6 @@ export function FormBuilder<T extends FieldValues>({
   title = 'Formulário',
   subTitle = 'Preencha os campos abaixo',
 }: FormBuilderProps<T>) {
-  //Chama o hook useFormBuilder para gerenciar o formulário
   const formMethods = useFormBuilder({
     schema,
     defaultValues,
@@ -93,7 +92,7 @@ export function FormBuilder<T extends FieldValues>({
           </Box>
           {children}
           {showSubmitButton && (
-            <Box sx={{ mt: 2, pt: 1, width: '100%' }}>
+            <Box sx={{ mt: 2, pt: 1, width: '100%', textAlign: 'center' }}>
               <ButtonSubmit
                 disabled={!isValid}
                 size="large"

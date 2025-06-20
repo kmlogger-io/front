@@ -5,31 +5,30 @@ import { useLogin } from "../hooks/useLogin.hook";
 import { Box } from "@mui/material";
 import { EMAIL_CHARACTER_LIMIT, PASSWORD_CHARACTER_LIMIT } from "../../../../../shared/constants/charcter-limits.const";
 
-export function Login(){
-    const { handleLogin } = useLogin();
-
+export function Login() {
+    const { handleLogin, isLoading } = useLogin();
+    
     const extraLinks = [
-        { name: 'Sign Up', path: '/sign-up' },
-        { name: 'Forgot Password?', path: '/forgot-password' },
         { name: 'Help', path: '/help' },
     ];
 
-    return(
-        <Box sx={{ width: '100%',
+    return (
+        <Box sx={{ 
+            width: '100%',
             maxWidth: 600,
-            margin: '0 auto', 
-            padding: 2, 
-            marginTop: 0 , 
-            height: '88vh', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            justifyContent: 'center' 
-            }}>
+            margin: '0 auto',
+            padding: 2,
+            marginTop: 0,
+            height: '88vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center'
+        }}>
             <FormBuilder
                 title="Login"
                 schema={loginSchema}
                 onSubmit={handleLogin}
-                submitButtonText="Login"
+                submitButtonText={isLoading ? "Entrando..." : "Login"}
                 defaultValues={{
                     email: '',
                     password: ''
@@ -43,20 +42,22 @@ export function Login(){
                     name="email"
                     label="Email"
                     InputType="email"
-                    placeholder="Digite seu email"
+                    placeholder="Enter your email or username"
                     autoComplete="email"
                     autoFocus={true}
                     CharacterLimit={EMAIL_CHARACTER_LIMIT}
+                    disabled={isLoading}
                 />
-                
+               
                 <FormField
                     name="password"
                     label="Password"
                     InputType="password"
-                    placeholder="Digite sua senha"
+                    placeholder="Enter your password"
                     CharacterLimit={PASSWORD_CHARACTER_LIMIT}
+                    disabled={isLoading}
                 />
             </FormBuilder>
         </Box>
-    ) 
+    );
 }
