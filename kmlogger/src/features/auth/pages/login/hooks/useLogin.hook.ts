@@ -18,9 +18,8 @@ export function useLogin() {
       email: data.email,
       password: data.password,
     };
-    const response = await login(request);
-    if (response?.data) {
-      navigate('/dashboard');
+    if (await login(request)) {
+      navigate('/home/dashboard');
     }
     setIsLoading(false);
   }, [login, navigate]);

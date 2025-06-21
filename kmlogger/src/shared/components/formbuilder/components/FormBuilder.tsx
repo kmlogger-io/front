@@ -24,6 +24,7 @@ interface FormBuilderProps<T extends FieldValues> {
   className?: string;
   title?: string;
   subTitle?: string;
+  isLoading?: boolean;
 }
 
 export function FormBuilder<T extends FieldValues>({
@@ -37,6 +38,7 @@ export function FormBuilder<T extends FieldValues>({
   className,
   title = 'Formulário',
   subTitle = 'Preencha os campos abaixo',
+  isLoading = false, // Novo prop
 }: FormBuilderProps<T>) {
   const formMethods = useFormBuilder({
     schema,
@@ -73,7 +75,6 @@ export function FormBuilder<T extends FieldValues>({
             >
               {title}
             </Typography>
-
             <Typography
               variant="body1"
               sx={{
@@ -94,7 +95,8 @@ export function FormBuilder<T extends FieldValues>({
           {showSubmitButton && (
             <Box sx={{ mt: 2, pt: 1, width: '100%', textAlign: 'center' }}>
               <ButtonSubmit
-                disabled={!isValid}
+                disabled={!isValid || isLoading} 
+                loading={isLoading} 
                 size="large"
                 variant="contained"
                 className="w-full h-14 text-lg font-semibold"
@@ -103,16 +105,16 @@ export function FormBuilder<T extends FieldValues>({
               </ButtonSubmit>
             </Box>
           )}
-
           {extralinks && (
             <ExtraLinks>
               {extralinks.map((link: ExtraLink, index: number) => (
                 <Typography
                   key={index}
                   component="a"
-                  onClick={() => handleNavigation(link.path)}
+                  onClick={() => !isLoading && handleNavigation(link.path)} // Previne navegação durante loading
                   sx={{
-                    cursor: 'pointer',
+                    cursor: isLoading ? 'not-allowed' : 'pointer',
+                    opacity: isLoading ? 0.5 : 1,
                   }}
                   variant="body2"
                 >

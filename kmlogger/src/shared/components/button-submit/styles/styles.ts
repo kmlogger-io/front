@@ -22,6 +22,7 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
     border: none;
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
    
     &::before {
       content: '';
@@ -30,6 +31,7 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
       left: -100%;
       width: 100%;
       height: 100%;
+      transition: left 0.3s ease;
     }
 
     &.w-full {
@@ -40,6 +42,7 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
     &:hover:not(:disabled) {
       background: var(--button-primary-hover);
       box-shadow: var(--shadow-primary-lg);
+      transform: translateY(-1px);
     }
    
     ${({ $state }) => {
@@ -69,8 +72,32 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
             background: var(--primary-dark);
             cursor: wait;
             transform: none;
+            position: relative;
+            
             &::before {
-              display: none;
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+              );
+              animation: shimmer 1.5s infinite;
+            }
+            
+            @keyframes shimmer {
+              0% { transform: translateX(-100%); }
+              100% { transform: translateX(100%); }
+            }
+            
+            &:hover {
+              background: var(--primary-dark);
+              transform: none;
             }
           `;
         default:
@@ -83,9 +110,15 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
       color: var(--button-disabled-text);
       opacity: 0.8;
       cursor: not-allowed;
+      transform: none;
      
       &::before {
         display: none;
+      }
+      
+      &:hover {
+        background: var(--button-disabled);
+        transform: none;
       }
     }
    
@@ -96,11 +129,12 @@ export const StyledButton = styled(LoadingButton)<StyledButtonProps>`
    
     &:focus {
       outline: none;
-      box-shadow: none;
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
     }
    
     .MuiLoadingButton-loadingIndicator {
-      color: white;
+      color: rgba(255, 255, 255, 0.8);
+      position: absolute;
     }
    
     .MuiCircularProgress-root {

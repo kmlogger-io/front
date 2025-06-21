@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import LoginIcon from '@mui/icons-material/Login';
-import { Box, Fade } from '@mui/material';
+import { Box, Fade, CircularProgress } from '@mui/material';
 import { useButtonSubmit } from '../hooks/useButtonSubmit';
 import { StyledButton } from '../styles/styles';
 
@@ -10,6 +10,7 @@ interface ButtonSubmitProps {
   children: React.ReactNode;
   onClick?: () => void | Promise<void>;
   disabled?: boolean;
+  loading?: boolean; 
   variant?: 'text' | 'outlined' | 'contained';
   color?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   size?: 'small' | 'medium' | 'large';
@@ -24,16 +25,19 @@ export interface ButtonSubmitRef {
 }
 
 export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
-  ({ 
-    children, 
-    onClick, 
-    disabled = false, 
+  ({
+    children,
+    onClick,
+    disabled = false,
+    loading = false, 
     variant = 'contained',
     color = 'primary',
     size = 'medium',
-    className 
+    className
   }, ref) => {
-    const { state, setLoading, setSuccess, setError, reset, isLoading } = useButtonSubmit();
+    const { state, setLoading, setSuccess, setError, reset, isLoading: internalLoading } = useButtonSubmit();
+
+    const isLoading = loading || internalLoading;
 
     useImperativeHandle(ref, () => ({
       setLoading,
@@ -41,10 +45,10 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
       setError,
       reset
     }));    
-    
+   
     const handleClick = async () => {
       if (disabled || isLoading) return;
-      
+     
       if (onClick) {
         try {
           setLoading();
@@ -57,11 +61,15 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
     };
 
     const getIcon = () => {
+      if (isLoading) {
+        return null;
+      }
+
       switch (state) {
         case 'success':
           return (
-            <Box sx={{ 
-              display: 'flex', 
+            <Box sx={{
+              display: 'flex',
               alignItems: 'center',
               animation: 'successPulse 0.6s ease-out',
               '@keyframes successPulse': {
@@ -75,8 +83,8 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
           );
         case 'error':
           return (
-            <Box sx={{ 
-              display: 'flex', 
+            <Box sx={{
+              display: 'flex',
               alignItems: 'center',
               animation: 'errorShake 0.5s ease-out',
               '@keyframes errorShake': {
@@ -102,9 +110,11 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
     };
 
     const getButtonText = () => {
+      if (isLoading) {
+        return '';
+      }
+
       switch (state) {
-        case 'loading':
-          return 'Entrando...';
         case 'success':
           return 'Sucesso!';
         case 'error':
@@ -113,19 +123,27 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
           return children;
       }
     };    
-    
+   
     return (
       <StyledButton
         onClick={handleClick}
-        disabled={disabled}
+        disabled={disabled || isLoading} 
         type='submit'
-        loading={isLoading}
+        loading={isLoading} 
         variant={variant}
         color={color}
         size={size}
         className={className}
-        startIcon={getIcon()}
-        $state={state}
+        startIcon={getIcon()} 
+        $state={isLoading ? 'loading' : state}
+        loadingIndicator={
+          <CircularProgress 
+            size={24} 
+            sx={{ 
+              color: 'rgba(255, 255, 255, 0.9)',
+            }} 
+          />
+        }
       >
         {getButtonText()}
       </StyledButton>
@@ -133,4 +151,4 @@ export const ButtonSubmit = forwardRef<ButtonSubmitRef, ButtonSubmitProps>(
   }
 );
 
-ButtonSubmit.displayName = 'ButtonSubmit';
+ButtonSubmit.displayName = 'ButtonSubmit';  

@@ -7,13 +7,13 @@ import { EMAIL_CHARACTER_LIMIT, PASSWORD_CHARACTER_LIMIT } from "../../../../../
 
 export function Login() {
     const { handleLogin, isLoading } = useLogin();
-    
+   
     const extraLinks = [
         { name: 'Help', path: '/help' },
     ];
 
     return (
-        <Box sx={{ 
+        <Box sx={{
             width: '100%',
             maxWidth: 600,
             margin: '0 auto',
@@ -37,6 +37,7 @@ export function Login() {
                 extralinks={extraLinks}
                 className="w-full gap-4"
                 subTitle="Please login to continue."
+                isLoading={isLoading}
             >
                 <FormField
                     name="email"
