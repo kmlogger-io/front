@@ -16,9 +16,9 @@ export const toEither = async <T>(apiCall: Promise<T>): Promise<Either<ApiError,
     return right(response);
   } catch (error: any) {
     return left({
-      statusCode: 0,
-      message: 'Erro de conexão',
-      notifications: undefined
+      statusCode: error?.details?.body?.statusCode ?? 0,
+      message: error?.details?.body?.message ??'Erro de conexão',
+      notifications: error?.details?.body?.notifications ?? undefined,
     });
   }
 };

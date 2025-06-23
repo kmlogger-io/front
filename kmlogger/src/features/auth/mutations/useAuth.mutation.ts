@@ -1,5 +1,5 @@
-import { useSnackbar } from '../../../shared/hooks/useSnackbar.hook';
 import { apiClient } from '../../../shared/services/apiService';
+import { useSnackbar } from '../../../shared/hooks/useSnackbar.hook';
 import type { 
   UseCasesUserLoginRequest, 
   UserLoginResponse,
@@ -23,7 +23,6 @@ export const useAuthMutation = () => {
         (client) => client.userLogin({ body: credentials }),
         {
           showMessages: true,
-          showSuccess,
           showError,
           onSuccess: (response: UserLoginResponse) => {
             if (response?.data?.token) {
