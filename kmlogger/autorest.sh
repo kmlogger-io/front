@@ -11,7 +11,7 @@ error() { echo -e "\033[1;31m[ERROR]\033[0m $1"; }
 ROOT_DIR="$(pwd)"
 SWAGGER_DIR="src/client/swagger"
 TEMP_FILE="$ROOT_DIR/temp.json"
-AUTOREST_API_DEFAULT="http://localhost:5000/swagger/v1/swagger.json"
+AUTOREST_API_DEFAULT="https://localhost:5071/swagger/v1/swagger.json"
 
 # 🔍 Carrega variáveis do .env se existir
 if [ -f "$ROOT_DIR/.env" ]; then

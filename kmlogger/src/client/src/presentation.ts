@@ -29,6 +29,18 @@ import {
   UserRefreshTokenResponse,
   UserLogoutOptionalParams,
   UserLogoutResponse,
+  UserRegisterOptionalParams,
+  UserRegisterResponse,
+  UserGetAllOptionalParams,
+  UserGetAllResponse,
+  UserDeleteOptionalParams,
+  UserDeleteResponse,
+  UserCompleteRegistrationOptionalParams,
+  UserCompleteRegistrationResponse,
+  UserRequestForgotPasswordOptionalParams,
+  UserRequestForgotPasswordResponse,
+  UserConfirmForgotPasswordOptionalParams,
+  UserConfirmForgotPasswordResponse,
 } from "./models/index.js";
 
 export class Presentation extends coreClient.ServiceClient {
@@ -191,6 +203,53 @@ export class Presentation extends coreClient.ServiceClient {
   /** @param options The options parameters. */
   userLogout(options?: UserLogoutOptionalParams): Promise<UserLogoutResponse> {
     return this.sendOperationRequest({ options }, userLogoutOperationSpec);
+  }
+
+  /** @param options The options parameters. */
+  userRegister(
+    options?: UserRegisterOptionalParams,
+  ): Promise<UserRegisterResponse> {
+    return this.sendOperationRequest({ options }, userRegisterOperationSpec);
+  }
+
+  /** @param options The options parameters. */
+  userGetAll(options?: UserGetAllOptionalParams): Promise<UserGetAllResponse> {
+    return this.sendOperationRequest({ options }, userGetAllOperationSpec);
+  }
+
+  /** @param options The options parameters. */
+  userDelete(options?: UserDeleteOptionalParams): Promise<UserDeleteResponse> {
+    return this.sendOperationRequest({ options }, userDeleteOperationSpec);
+  }
+
+  /** @param options The options parameters. */
+  userCompleteRegistration(
+    options?: UserCompleteRegistrationOptionalParams,
+  ): Promise<UserCompleteRegistrationResponse> {
+    return this.sendOperationRequest(
+      { options },
+      userCompleteRegistrationOperationSpec,
+    );
+  }
+
+  /** @param options The options parameters. */
+  userRequestForgotPassword(
+    options?: UserRequestForgotPasswordOptionalParams,
+  ): Promise<UserRequestForgotPasswordResponse> {
+    return this.sendOperationRequest(
+      { options },
+      userRequestForgotPasswordOperationSpec,
+    );
+  }
+
+  /** @param options The options parameters. */
+  userConfirmForgotPassword(
+    options?: UserConfirmForgotPasswordOptionalParams,
+  ): Promise<UserConfirmForgotPasswordResponse> {
+    return this.sendOperationRequest(
+      { options },
+      userConfirmForgotPasswordOperationSpec,
+    );
   }
 }
 // Operation Specifications
@@ -483,7 +542,7 @@ const userRefreshTokenOperationSpec: coreClient.OperationSpec = {
   serializer,
 };
 const userLogoutOperationSpec: coreClient.OperationSpec = {
-  path: "/User/LogoutByEmail",
+  path: "/User/Logout",
   httpMethod: "POST",
   responses: {
     200: {
@@ -502,9 +561,159 @@ const userLogoutOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.BaseResponseSystemObject,
     },
   },
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.accept],
+  serializer,
+};
+const userRegisterOperationSpec: coreClient.OperationSpec = {
+  path: "/User/Register",
+  httpMethod: "POST",
+  responses: {
+    200: {
+      bodyMapper: Mappers.BaseResponseUseCasesUserRegisterResponse,
+    },
+    400: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    401: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    403: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    500: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+  },
   requestBody: Parameters.body5,
   urlParameters: [Parameters.$host],
   headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",
+  serializer,
+};
+const userGetAllOperationSpec: coreClient.OperationSpec = {
+  path: "/User/GetAll",
+  httpMethod: "GET",
+  responses: {
+    200: {
+      bodyMapper: Mappers.BaseResponseListDomainRecordsDtosUserDto,
+    },
+    400: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    401: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    403: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    500: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+  },
+  queryParameters: [Parameters.page, Parameters.pageSize],
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.accept],
+  serializer,
+};
+const userDeleteOperationSpec: coreClient.OperationSpec = {
+  path: "/User/Delete",
+  httpMethod: "DELETE",
+  responses: {
+    200: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    400: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    401: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    403: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    500: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+  },
+  queryParameters: [Parameters.id],
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.accept],
+  serializer,
+};
+const userCompleteRegistrationOperationSpec: coreClient.OperationSpec = {
+  path: "/User/CompleteRegistration",
+  httpMethod: "PUT",
+  responses: {
+    200: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    400: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    401: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    403: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    500: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+  },
+  requestBody: Parameters.body6,
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.contentType, Parameters.accept],
+  mediaType: "json",
+  serializer,
+};
+const userRequestForgotPasswordOperationSpec: coreClient.OperationSpec = {
+  path: "/User/RequestForgotPassword",
+  httpMethod: "POST",
+  responses: {
+    200: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    400: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    401: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    403: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    500: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+  },
+  queryParameters: [Parameters.email],
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.accept],
+  serializer,
+};
+const userConfirmForgotPasswordOperationSpec: coreClient.OperationSpec = {
+  path: "/User/ConfirmForgotPassword",
+  httpMethod: "POST",
+  responses: {
+    200: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    400: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    401: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    403: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    500: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+  },
+  queryParameters: [Parameters.id, Parameters.token, Parameters.password],
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.accept],
   serializer,
 };

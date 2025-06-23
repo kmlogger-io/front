@@ -9,7 +9,8 @@ import {
   UseCasesLogCreateRequest as UseCasesLogCreateRequestMapper,
   UseCasesUserLoginRequest as UseCasesUserLoginRequestMapper,
   UseCasesUserRefreshTokenRequest as UseCasesUserRefreshTokenRequestMapper,
-  UseCasesUserLogoutRequest as UseCasesUserLogoutRequestMapper,
+  UseCasesUserRegisterRequest as UseCasesUserRegisterRequestMapper,
+  UseCasesUserCompleteRegistrationRequest as UseCasesUserCompleteRegistrationRequestMapper,
 } from "../models/mappers.js";
 
 export const contentType: OperationParameter = {
@@ -155,5 +156,60 @@ export const body4: OperationParameter = {
 
 export const body5: OperationParameter = {
   parameterPath: ["options", "body"],
-  mapper: UseCasesUserLogoutRequestMapper,
+  mapper: UseCasesUserRegisterRequestMapper,
+};
+
+export const page: OperationQueryParameter = {
+  parameterPath: ["options", "page"],
+  mapper: {
+    serializedName: "Page",
+    type: {
+      name: "Number",
+    },
+  },
+};
+
+export const pageSize: OperationQueryParameter = {
+  parameterPath: ["options", "pageSize"],
+  mapper: {
+    serializedName: "PageSize",
+    type: {
+      name: "Number",
+    },
+  },
+};
+
+export const body6: OperationParameter = {
+  parameterPath: ["options", "body"],
+  mapper: UseCasesUserCompleteRegistrationRequestMapper,
+};
+
+export const email: OperationQueryParameter = {
+  parameterPath: ["options", "email"],
+  mapper: {
+    serializedName: "email",
+    type: {
+      name: "String",
+    },
+  },
+};
+
+export const token: OperationQueryParameter = {
+  parameterPath: ["options", "token"],
+  mapper: {
+    serializedName: "token",
+    type: {
+      name: "Uuid",
+    },
+  },
+};
+
+export const password: OperationQueryParameter = {
+  parameterPath: ["options", "password"],
+  mapper: {
+    serializedName: "password",
+    type: {
+      name: "String",
+    },
+  },
 };

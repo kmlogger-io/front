@@ -194,10 +194,6 @@ export interface UseCasesUserRefreshTokenResponse {
   user?: UseCasesUserLoginUserInfo;
 }
 
-export interface UseCasesUserLogoutRequest {
-  email?: string;
-}
-
 export interface BaseResponseUseCasesUserLogoutResponse {
   statusCode?: number;
   message?: string;
@@ -208,6 +204,56 @@ export interface BaseResponseUseCasesUserLogoutResponse {
 export interface UseCasesUserLogoutResponse {
   message?: string;
   logoutTime?: Date;
+}
+
+export interface UseCasesUserRegisterRequest {
+  fullName?: DomainValueObjectsFullName;
+  email?: string;
+  rolesId?: string[];
+}
+
+export interface DomainValueObjectsFullName {
+  /** NOTE: This property will not be serialized. It can only be populated by the server. */
+  readonly notifications?: FluntNotificationsNotification[];
+  /** NOTE: This property will not be serialized. It can only be populated by the server. */
+  readonly isValid?: boolean;
+  firstName?: string;
+  lastName?: string;
+}
+
+export interface BaseResponseUseCasesUserRegisterResponse {
+  statusCode?: number;
+  message?: string;
+  /** Any object */
+  data?: Record<string, unknown>;
+  notifications?: FluntNotificationsNotification[];
+}
+
+export interface BaseResponseListDomainRecordsDtosUserDto {
+  statusCode?: number;
+  message?: string;
+  data?: DomainRecordsDtosUserDto[];
+  notifications?: FluntNotificationsNotification[];
+}
+
+export interface DomainRecordsDtosUserDto {
+  id?: string;
+  name?: string;
+  email?: string;
+  roles?: DomainRecordsDtosRoleDto[];
+  active?: boolean;
+}
+
+export interface DomainRecordsDtosRoleDto {
+  id?: string;
+  name?: string;
+  slug?: string;
+}
+
+export interface UseCasesUserCompleteRegistrationRequest {
+  id?: string;
+  token?: string;
+  password?: string;
 }
 
 /** Known values of {@link DomainEnumsEnvironment} that the service accepts. */
@@ -335,12 +381,65 @@ export type UserRefreshTokenResponse =
   BaseResponseUseCasesUserRefreshTokenResponse;
 
 /** Optional parameters. */
-export interface UserLogoutOptionalParams extends coreClient.OperationOptions {
-  body?: UseCasesUserLogoutRequest;
-}
+export interface UserLogoutOptionalParams extends coreClient.OperationOptions {}
 
 /** Contains response data for the userLogout operation. */
 export type UserLogoutResponse = BaseResponseUseCasesUserLogoutResponse;
+
+/** Optional parameters. */
+export interface UserRegisterOptionalParams
+  extends coreClient.OperationOptions {
+  body?: UseCasesUserRegisterRequest;
+}
+
+/** Contains response data for the userRegister operation. */
+export type UserRegisterResponse = BaseResponseUseCasesUserRegisterResponse;
+
+/** Optional parameters. */
+export interface UserGetAllOptionalParams extends coreClient.OperationOptions {
+  page?: number;
+  pageSize?: number;
+}
+
+/** Contains response data for the userGetAll operation. */
+export type UserGetAllResponse = BaseResponseListDomainRecordsDtosUserDto;
+
+/** Optional parameters. */
+export interface UserDeleteOptionalParams extends coreClient.OperationOptions {
+  id?: string;
+}
+
+/** Contains response data for the userDelete operation. */
+export type UserDeleteResponse = BaseResponseSystemObject;
+
+/** Optional parameters. */
+export interface UserCompleteRegistrationOptionalParams
+  extends coreClient.OperationOptions {
+  body?: UseCasesUserCompleteRegistrationRequest;
+}
+
+/** Contains response data for the userCompleteRegistration operation. */
+export type UserCompleteRegistrationResponse = BaseResponseSystemObject;
+
+/** Optional parameters. */
+export interface UserRequestForgotPasswordOptionalParams
+  extends coreClient.OperationOptions {
+  email?: string;
+}
+
+/** Contains response data for the userRequestForgotPassword operation. */
+export type UserRequestForgotPasswordResponse = BaseResponseSystemObject;
+
+/** Optional parameters. */
+export interface UserConfirmForgotPasswordOptionalParams
+  extends coreClient.OperationOptions {
+  id?: string;
+  token?: string;
+  password?: string;
+}
+
+/** Contains response data for the userConfirmForgotPassword operation. */
+export type UserConfirmForgotPasswordResponse = BaseResponseSystemObject;
 
 /** Optional parameters. */
 export interface PresentationOptionalParams

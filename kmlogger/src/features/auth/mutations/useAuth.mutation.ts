@@ -3,8 +3,6 @@ import { apiClient } from '../../../shared/services/apiService';
 import type { 
   UseCasesUserLoginRequest, 
   UserLoginResponse,
-  UseCasesUserRefreshTokenRequest,
-  UserRefreshTokenResponse
 } from '../../../client/src';
 
 /**
@@ -69,48 +67,12 @@ export const useAuthMutation = () => {
     }
   };
 
-  /**
-   * Handles refresh token operation
-   * @param refreshTokenData Refresh token request data
-   * @returns Promise with refresh response or null
-   */
-  const refreshToken = async (
-    refreshTokenData: UseCasesUserRefreshTokenRequest
-  ): Promise<UserRefreshTokenResponse | null> => {
-    try {
-      const result = await apiClient.callPublicComplete<UserRefreshTokenResponse>(
-        (client) => client.userRefreshToken({ body: refreshTokenData }),
-        {
-          showMessages: true,
-          showSuccess,
-          showError,
-          onSuccess: (response: UserRefreshTokenResponse) => {
-            if (response?.data?.token) {
-              apiClient.saveAuthData(
-                response?.data?.token,
-                response?.data?.user || {},
-                response?.data?.refreshToken
-              );
-            }
-          },
-        }
-      );
-
-      return result;
-    } catch (error) {
-      console.error('[useAuthMutation] Unexpected error during token refresh', error);
-      throw error;
-    }
-  };
-
   return {
     login,
     logout,
-    refreshToken,
   };
 };
 
 export type AuthMutationHook = ReturnType<typeof useAuthMutation>;
 export type LoginFunction = AuthMutationHook['login'];
 export type LogoutFunction = AuthMutationHook['logout'];
-export type RefreshTokenFunction = AuthMutationHook['refreshToken'];

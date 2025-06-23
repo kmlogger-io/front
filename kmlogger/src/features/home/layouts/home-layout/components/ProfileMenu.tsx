@@ -4,10 +4,11 @@ import {
   Settings as SettingsIcon,
   Help as HelpIcon,
   Logout as LogoutIcon,
-  Dashboard as DashboardIcon,
-  Notifications as NotificationsIcon
+  AdminPanelSettings as AdminIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../../../shared/hooks/useAuthContext.hook';
+import { useRoles } from '../../../../../shared/hooks/useRoles.hook';
 import type { ReactElement } from 'react';
 
 interface ProfileMenuItem {
@@ -16,6 +17,7 @@ interface ProfileMenuItem {
   path?: string;
   action?: () => void;
   divider?: boolean;
+  adminOnly?: boolean; // ✅ Nova propriedade para itens apenas para admin
 }
 
 interface ProfileMenuProps {
@@ -26,6 +28,8 @@ interface ProfileMenuProps {
 
 export function ProfileMenu({ anchorEl, open, onClose }: ProfileMenuProps) {
   const navigate = useNavigate();
+  const { logout } = useAuth();
+  const { isAdmin } = useRoles(); // ✅ Hook para verificar roles
 
   const handleItemClick = (item: ProfileMenuItem) => {
     if (item.action) {
@@ -36,16 +40,35 @@ export function ProfileMenu({ anchorEl, open, onClose }: ProfileMenuProps) {
     onClose();
   };
 
-  const handleLogout = () => {
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+      navigate('/auth/login', { replace: true });
+    }
   };
 
-  const profileMenuItems: ProfileMenuItem[] = [
+  const allProfileMenuItems: ProfileMenuItem[] = [
     { icon: <ProfileIcon />, text: 'My Profile', path: '/profile' },
     { icon: <SettingsIcon />, text: 'Settings', path: '/settings' },
+    { 
+      icon: <AdminIcon />, 
+      text: 'User Administration', 
+      path: '/admin/users', 
+      adminOnly: true, 
+      divider: true 
+    },
     { icon: <HelpIcon />, text: 'Help & Support', path: '/help' },
     { icon: <LogoutIcon />, text: 'Logout', action: handleLogout, divider: true }
   ];
+
+  const profileMenuItems = allProfileMenuItems.filter(item => {
+    if (item.adminOnly && !isAdmin()) {
+      return false;
+    }
+    return true;
+  });
 
   return (
     <Menu
@@ -91,7 +114,10 @@ export function ProfileMenu({ anchorEl, open, onClose }: ProfileMenuProps) {
           {item.divider && <Divider sx={{ my: '0.5rem', borderColor: 'var(--border)' }} />}
           <MenuItem
             onClick={() => handleItemClick(item)}
-            className={item.text === 'Logout' ? 'logout-item' : ''}
+            className={
+              item.text === 'Logout' ? 'logout-item' : 
+              item.adminOnly ? 'admin-item' : ''
+            }
           >
             <ListItemIcon>
               {item.icon}

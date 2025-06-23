@@ -1068,22 +1068,6 @@ export const UseCasesUserRefreshTokenResponse: coreClient.CompositeMapper = {
   },
 };
 
-export const UseCasesUserLogoutRequest: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "UseCasesUserLogoutRequest",
-    modelProperties: {
-      email: {
-        serializedName: "email",
-        nullable: true,
-        type: {
-          name: "String",
-        },
-      },
-    },
-  },
-};
-
 export const BaseResponseUseCasesUserLogoutResponse: coreClient.CompositeMapper =
   {
     type: {
@@ -1148,3 +1132,282 @@ export const UseCasesUserLogoutResponse: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const UseCasesUserRegisterRequest: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "UseCasesUserRegisterRequest",
+    modelProperties: {
+      fullName: {
+        serializedName: "fullName",
+        type: {
+          name: "Composite",
+          className: "DomainValueObjectsFullName",
+        },
+      },
+      email: {
+        serializedName: "email",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      rolesId: {
+        serializedName: "rolesId",
+        nullable: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Uuid",
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
+export const DomainValueObjectsFullName: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "DomainValueObjectsFullName",
+    modelProperties: {
+      notifications: {
+        serializedName: "notifications",
+        readOnly: true,
+        nullable: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "FluntNotificationsNotification",
+            },
+          },
+        },
+      },
+      isValid: {
+        serializedName: "isValid",
+        readOnly: true,
+        type: {
+          name: "Boolean",
+        },
+      },
+      firstName: {
+        serializedName: "firstName",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      lastName: {
+        serializedName: "lastName",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+    },
+  },
+};
+
+export const BaseResponseUseCasesUserRegisterResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesUserRegisterResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        data: {
+          serializedName: "data",
+          type: {
+            name: "Dictionary",
+            value: { type: { name: "any" } },
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
+export const BaseResponseListDomainRecordsDtosUserDto: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListDomainRecordsDtosUserDto",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        data: {
+          serializedName: "data",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "DomainRecordsDtosUserDto",
+              },
+            },
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
+export const DomainRecordsDtosUserDto: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "DomainRecordsDtosUserDto",
+    modelProperties: {
+      id: {
+        serializedName: "id",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      name: {
+        serializedName: "name",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      email: {
+        serializedName: "email",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      roles: {
+        serializedName: "roles",
+        nullable: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "DomainRecordsDtosRoleDto",
+            },
+          },
+        },
+      },
+      active: {
+        serializedName: "active",
+        type: {
+          name: "Boolean",
+        },
+      },
+    },
+  },
+};
+
+export const DomainRecordsDtosRoleDto: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "DomainRecordsDtosRoleDto",
+    modelProperties: {
+      id: {
+        serializedName: "id",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      name: {
+        serializedName: "name",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      slug: {
+        serializedName: "slug",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+    },
+  },
+};
+
+export const UseCasesUserCompleteRegistrationRequest: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "UseCasesUserCompleteRegistrationRequest",
+      modelProperties: {
+        id: {
+          serializedName: "id",
+          type: {
+            name: "Uuid",
+          },
+        },
+        token: {
+          serializedName: "token",
+          type: {
+            name: "Uuid",
+          },
+        },
+        password: {
+          serializedName: "password",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+      },
+    },
+  };

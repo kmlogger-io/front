@@ -5,6 +5,7 @@ import type { AccessToken, TokenCredential } from '@azure/core-auth';
 import type { ApiError, BaseResponse } from '../types/api-types.types';
 import { Presentation } from '../../client/src';
 import { toEither } from '../functions/api-error.handler';
+import type { UserInfo } from '../types/auth.types';
 
 /**
  * Bearer token credential implementation for authenticated API calls
@@ -267,12 +268,15 @@ class ApiClientService {
    * Gets the current user data from localStorage
    * @returns User object or null if not found
    */
-  public getCurrentUser(): unknown {
+  public getCurrentUser(): UserInfo | null {
     try {
       const userStr = localStorage.getItem('user');
-      const user = userStr ? JSON.parse(userStr) : null;
-      return user;
-    } catch {
+      if (!userStr) return null;
+      
+      const user = JSON.parse(userStr);
+      return user as UserInfo;
+    } catch (error) {
+      console.error('Error parsing user data:', error);
       return null;
     }
   }
@@ -283,7 +287,7 @@ class ApiClientService {
    * @param user User information
    * @param refreshToken Optional refresh token
    */
-  public saveAuthData(token: string, user: unknown, refreshToken?: string): void {
+  public saveAuthData(token: string, user: UserInfo | unknown, refreshToken?: string): void {
     if (!token) {
       throw new Error('Token is required for authentication');
     }
@@ -297,7 +301,8 @@ class ApiClientService {
       }
       
       this.updateClientWithToken();
-    } catch {
+    } catch (error) {
+      console.error('Error saving auth data:', error);
       throw new Error('Failed to save authentication data');
     }
   }
@@ -323,7 +328,7 @@ class ApiClientService {
   }
 
   private handleUnexpectedError(options: ApiCallDataOptions<any> | ApiCallCompleteOptions<any>): void {
-    if (options.showError) {
+    if (options.showError) {  
       options.showError('Erro inesperado na chamada da API');
     }
   }
