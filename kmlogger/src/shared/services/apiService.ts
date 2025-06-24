@@ -20,7 +20,7 @@ class BearerTokenCredential implements TokenCredential {
   async getToken(): Promise<AccessToken> {
     return {
       token: this.token,
-      expiresOnTimestamp: Date.now() + (60 * 60 * 1000), // 1 hour
+      expiresOnTimestamp: Date.now() + (60 * 60 * 1000),
     };
   }
 }
