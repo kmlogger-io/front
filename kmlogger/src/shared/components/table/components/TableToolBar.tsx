@@ -11,11 +11,7 @@ import { Delete } from '@mui/icons-material';
 import { useTableStore } from '../stores/useTableStore.store';
 import { useTableContext } from '../contexts/TableContext';
 
-interface TableToolbarProps {
-  onBulkDelete?: (selectedIds: readonly string[]) => void;
-}
-
-const TableToolbar: React.FC<TableToolbarProps> = ({ onBulkDelete }) => {
+const TableToolbar = () => {
   const { selected } = useTableStore();
   const { title, subtitle, showSelection } = useTableContext();
   
@@ -61,17 +57,6 @@ const TableToolbar: React.FC<TableToolbarProps> = ({ onBulkDelete }) => {
             </Typography>
           )}
         </Box>
-      )}
-      
-      {numSelected > 0 && onBulkDelete && showSelection && (
-        <Tooltip title="Deletar selecionados">
-          <IconButton
-            onClick={() => onBulkDelete(selected)}
-            color="error"
-          >
-            <Delete />
-          </IconButton>
-        </Tooltip>
       )}
     </Toolbar>
   );

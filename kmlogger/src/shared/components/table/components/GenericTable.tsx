@@ -1,7 +1,10 @@
 import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
 import type { TableData } from '../stores/useTableStore.store';
 import { TableProvider, type TableAction, type TableColumn } from '../contexts/TableContext';
 import DataTable from './TableData';
+import { customTableTheme } from '../../../../styles/overrides/table-styles';
 
 interface GenericTableProps {
   data: TableData[];
@@ -16,13 +19,12 @@ interface GenericTableProps {
   title?: string;
   subtitle?: string;
   onDataChange?: (data: TableData[]) => void;
-  onBulkDelete?: (selectedIds: readonly string[]) => void;
 }
 
-const GenericTable: React.FC<GenericTableProps> = ({ 
-  data, 
-  columns, 
-  actions, 
+const GenericTable: React.FC<GenericTableProps> = ({
+  data,
+  columns,
+  actions,
   showFilters = true,
   showSelection = false,
   showPagination = true,
@@ -32,7 +34,6 @@ const GenericTable: React.FC<GenericTableProps> = ({
   title,
   subtitle,
   onDataChange,
-  onBulkDelete
 }) => {
   const config = {
     columns,
@@ -46,15 +47,17 @@ const GenericTable: React.FC<GenericTableProps> = ({
     title,
     subtitle
   };
-  
+
   return (
-    <TableProvider config={config}>
-      <DataTable 
-        data={data} 
-        onDataChange={onDataChange}
-        onBulkDelete={onBulkDelete}
-      />
-    </TableProvider>
+    <ThemeProvider theme={customTableTheme}>
+      <CssBaseline />
+      <TableProvider config={config}>
+        <DataTable
+          data={data}
+          onDataChange={onDataChange}
+        />
+      </TableProvider>
+    </ThemeProvider>
   );
 };
 

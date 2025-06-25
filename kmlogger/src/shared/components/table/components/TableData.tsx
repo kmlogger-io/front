@@ -19,13 +19,11 @@ import TableRowComponent from './TableRow';
 interface DataTableProps {
   data: TableData[];
   onDataChange?: (data: TableData[]) => void;
-  onBulkDelete?: (selectedIds: readonly string[]) => void;
 }
 
 const DataTable: React.FC<DataTableProps> = ({ 
   data, 
   onDataChange, 
-  onBulkDelete 
 }) => {
   const { 
     filteredData, 
@@ -75,7 +73,7 @@ const DataTable: React.FC<DataTableProps> = ({
   if (loading) {
     return (
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <TableToolbar onBulkDelete={onBulkDelete} />
+        <TableToolbar />
         <TableFilters />
         <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
           <CircularProgress />
@@ -86,7 +84,7 @@ const DataTable: React.FC<DataTableProps> = ({
   
   return (
     <Paper sx={{ width: '100%', mb: 2 }}>
-      <TableToolbar onBulkDelete={onBulkDelete} />
+      <TableToolbar/>
       <TableFilters />
       
       <TableContainer sx={{ maxHeight: maxHeight }}>
