@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { 
   Box, 
   Typography, 
-  Paper, 
   Button, 
   Chip, 
   Avatar,
-  IconButton,
   Tooltip
 } from '@mui/material';
 import {
@@ -25,7 +23,7 @@ import {
 } from '@mui/icons-material';
 import type { TableData } from '../../../../shared/components/table/stores/useTableStore.store';
 import type { TableAction, TableColumn } from '../../../../shared/components/table/contexts/TableContext';
-import GenericTable from '../../../../shared/components/table/components/GenericTable';
+import GenericTable from '../../../../shared/components/table/Table';
 
 interface User extends TableData {
   id: number;
@@ -267,7 +265,7 @@ export function UserAdministration() {
       },
       disabled: (item: TableData) => {
         const user = item as User;
-        return user.role === 'Admin' || user.id === 1; // Proteger admin principal
+        return user.role === 'Admin' || user.id === 1; 
       }
     }
   ];

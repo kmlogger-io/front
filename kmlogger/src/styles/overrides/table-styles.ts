@@ -397,7 +397,6 @@ export const customTableTheme = createTheme({
   },
 });
 
-// Adicione estas declarações de módulo para estender o tema
 declare module '@mui/material/styles' {
   interface Palette {
     surface: {

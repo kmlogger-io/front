@@ -1,4 +1,3 @@
-// shared/pages/not-found/NotFound.tsx
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../../components/logo/components/Logo';
