@@ -1,259 +1,260 @@
 import * as coreClient from "@azure/core-client";
 
 export interface UseCasesAppCreateRequest {
-  name?: string;
-  categoryId?: string;
-  environment?: DomainEnumsEnvironment;
+  name: string;
+  categoryId: string;
+  environment: DomainEnumsEnvironment;
 }
 
 export interface BaseResponseUseCasesAppCreateResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesAppCreateResponse;
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesAppCreateResponse;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesAppCreateResponse {
-  appId?: string;
-  name?: string;
-  categoryName?: string;
-  environment?: string;
+  appId: string;
+  name: string;
+  categoryName: string;
+  environment: string;
 }
 
 export interface FluntNotificationsNotification {
-  key?: string;
-  message?: string;
+  key: string;
+  message: string;
 }
 
 export interface BaseResponseSystemObject {
-  statusCode?: number;
-  message?: string;
+  statusCode: number;
+  message: string;
   /** Anything */
-  data?: any;
-  notifications?: FluntNotificationsNotification[];
+  data: any;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface BaseResponseListUseCasesAppReadAllResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesAppReadAllResponse[];
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesAppReadAllResponse[];
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesAppReadAllResponse {
-  id?: string;
+  id: string;
   name?: string;
   categoryName?: string;
   environment?: string;
 }
 
 export interface UseCasesCategoryCreateRequest {
-  name?: string;
+  name: string;
 }
 
 export interface BaseResponseUseCasesCategoryCreateResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesCategoryCreateResponse;
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesCategoryCreateResponse;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesCategoryCreateResponse {
-  id?: string;
+  id: string;
   name?: string;
 }
 
 export interface BaseResponseUseCasesCategoryDeleteResponse {
-  statusCode?: number;
-  message?: string;
+  statusCode: number;
+  message: string;
   /** Any object */
-  data?: Record<string, unknown>;
-  notifications?: FluntNotificationsNotification[];
+  data: Record<string, unknown>;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface BaseResponseListUseCasesCategoryReadRealAllResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesCategoryReadRealAllResponse[];
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesCategoryReadRealAllResponse[];
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesCategoryReadRealAllResponse {
-  id?: string;
-  name?: string;
+  id: string;
+  name: string;
 }
 
 export interface UseCasesLogCreateRequest {
-  appId?: string;
-  message?: string;
-  level?: string;
+  appId: string;
+  message: string;
+  level: string;
   stackTrace?: string;
   source?: string;
-  environment?: DomainEnumsEnvironment;
+  environment: DomainEnumsEnvironment;
 }
 
 export interface BaseResponseUseCasesLogCreateResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesLogCreateResponse;
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesLogCreateResponse;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesLogCreateResponse {
-  id?: string;
+  id: string;
 }
 
 export interface BaseResponseListUseCasesLogReadAllByDateResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesLogReadAllByDateResponse[];
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesLogReadAllByDateResponse[];
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesLogReadAllByDateResponse {
-  id?: string;
-  appId?: string;
-  message?: string;
-  level?: string;
-  createdDate?: Date;
+  id: string;
+  appId: string;
+  message: string;
+  level: string;
+  createdDate: Date;
 }
 
 export interface BaseResponseListUseCasesLogReadByAppResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesLogReadByAppResponse[];
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesLogReadByAppResponse[];
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesLogReadByAppResponse {
-  id?: string;
-  appId?: string;
-  message?: string;
-  level?: string;
-  createdDate?: Date;
+  id: string;
+  appId: string;
+  message: string;
+  level: string;
+  createdDate: Date;
 }
 
 export interface BaseResponseUseCasesLogReadByIdResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesLogReadByIdResponse;
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesLogReadByIdResponse;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesLogReadByIdResponse {
-  id?: string;
-  appId?: string;
-  message?: string;
-  level?: string;
-  createdDate?: Date;
+  id: string;
+  appId: string;
+  message: string;
+  level: string;
+  createdDate: Date;
 }
 
 export interface UseCasesUserLoginRequest {
-  email?: string;
-  password?: string;
+  email: string;
+  password: string;
 }
 
 export interface BaseResponseUseCasesUserLoginResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesUserLoginResponse;
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesUserLoginResponse;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesUserLoginResponse {
-  token?: string;
-  refreshToken?: string;
-  tokenExpiry?: Date;
-  refreshTokenExpiry?: Date;
-  user?: UseCasesUserLoginUserInfo;
+  token: string;
+  refreshToken: string;
+  tokenExpiry: Date;
+  refreshTokenExpiry: Date;
+  user: UseCasesUserLoginUserInfo;
 }
 
 export interface UseCasesUserLoginUserInfo {
-  id?: string;
-  name?: string;
-  email?: string;
+  id: string;
+  name: string;
+  email: string;
 }
 
 export interface UseCasesUserRefreshTokenRequest {
-  accessToken?: string;
-  refreshToken?: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface BaseResponseUseCasesUserRefreshTokenResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesUserRefreshTokenResponse;
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesUserRefreshTokenResponse;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesUserRefreshTokenResponse {
-  token?: string;
-  refreshToken?: string;
-  tokenExpiry?: Date;
-  refreshTokenExpiry?: Date;
+  token: string;
+  refreshToken: string;
+  tokenExpiry: Date;
+  refreshTokenExpiry: Date;
   user?: UseCasesUserLoginUserInfo;
 }
 
 export interface BaseResponseUseCasesUserLogoutResponse {
-  statusCode?: number;
-  message?: string;
-  data?: UseCasesUserLogoutResponse;
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: UseCasesUserLogoutResponse;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface UseCasesUserLogoutResponse {
-  message?: string;
-  logoutTime?: Date;
+  message: string;
+  logoutTime: Date;
 }
 
 export interface UseCasesUserRegisterRequest {
-  fullName?: DomainValueObjectsFullName;
-  email?: string;
-  rolesId?: string[];
+  fullName: DomainValueObjectsFullName;
+  email: string;
+  rolesId: string[];
 }
 
 export interface DomainValueObjectsFullName {
   /** NOTE: This property will not be serialized. It can only be populated by the server. */
-  readonly notifications?: FluntNotificationsNotification[];
+  readonly notifications: FluntNotificationsNotification[];
   /** NOTE: This property will not be serialized. It can only be populated by the server. */
-  readonly isValid?: boolean;
-  firstName?: string;
-  lastName?: string;
+  readonly isValid: boolean;
+  firstName: string;
+  lastName: string;
 }
 
 export interface BaseResponseUseCasesUserRegisterResponse {
-  statusCode?: number;
-  message?: string;
+  statusCode: number;
+  message: string;
   /** Any object */
-  data?: Record<string, unknown>;
-  notifications?: FluntNotificationsNotification[];
+  data: Record<string, unknown>;
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface BaseResponseListDomainRecordsDtosUserDto {
-  statusCode?: number;
-  message?: string;
-  data?: DomainRecordsDtosUserDto[];
-  notifications?: FluntNotificationsNotification[];
+  statusCode: number;
+  message: string;
+  data: DomainRecordsDtosUserDto[];
+  notifications: FluntNotificationsNotification[];
 }
 
 export interface DomainRecordsDtosUserDto {
-  id?: string;
-  name?: string;
-  email?: string;
-  roles?: DomainRecordsDtosRoleDto[];
-  active?: boolean;
+  id: string;
+  name: string;
+  email: string;
+  createdAt: Date;
+  roles: DomainRecordsDtosRoleDto[];
+  active: boolean;
 }
 
 export interface DomainRecordsDtosRoleDto {
-  id?: string;
-  name?: string;
-  slug?: string;
+  id: string;
+  name: string;
+  slug: string;
 }
 
 export interface UseCasesUserCompleteRegistrationRequest {
-  id?: string;
-  token?: string;
-  password?: string;
+  id: string;
+  token: string;
+  password: string;
 }
 
 /** Known values of {@link DomainEnumsEnvironment} that the service accepts. */

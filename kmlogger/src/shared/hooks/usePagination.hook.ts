@@ -1,41 +1,41 @@
 import type { PaginationState, Updater } from '@tanstack/react-table'
-import { usePaginacaoContext } from '../contexts/PaginationContext'
+import { usePaginationContext } from '../contexts/PaginationContext'
 
-export type PaginacaoTipo = {
-  indicePagina: number
-  itensPorPagina: number
-  totalItens: number
+export type PaginationType = {
+  pageIndex: number
+  itemsPerPage: number
+  totalItems: number
 }
 
-export function usePaginacaoTabela() {
-  const { estado, dispatch } = usePaginacaoContext()
+export function usePaginationTable() {
+  const { state, dispatch } = usePaginationContext()
 
-  const aoMudarPaginacao = (paginacao: Updater<PaginationState>) => {
-    const paginacaoAtual = {
-      pageIndex: estado.indicePagina,
-      pageSize: estado.itensPorPagina,
+  const onPaginationChange = (pagination: Updater<PaginationState>) => {
+    const currentPagination = {
+      pageIndex: state.pageIndex,
+      pageSize: state.itemsPerPage,
     }
 
-    const novaPaginacao =
-      typeof paginacao === 'function' ? paginacao(paginacaoAtual) : paginacao
+    const newPagination =
+      typeof pagination === 'function' ? pagination(currentPagination) : pagination
 
     dispatch({
-      tipo: 'atualizarPaginacao',
-      paginacao: {
-        indicePagina: novaPaginacao.pageIndex,
-        itensPorPagina: novaPaginacao.pageSize,
+      type: 'updatePagination',
+      pagination: {
+        pageIndex: newPagination.pageIndex,
+        itemsPerPage: newPagination.pageSize,
       },
     })
   }
 
-  const paginacao: PaginacaoTipo & {
-    aoMudarPaginacao: (paginacao: Updater<PaginationState>) => void
+  const pagination: PaginationType & {
+    onPaginationChange: (pagination: Updater<PaginationState>) => void
   } = {
-    indicePagina: estado.indicePagina,
-    itensPorPagina: estado.itensPorPagina,
-    totalItens: estado.totalItens,
-    aoMudarPaginacao,
+    pageIndex: state.pageIndex,
+    itemsPerPage: state.itemsPerPage,
+    totalItems: state.totalItems,
+    onPaginationChange,
   }
 
-  return paginacao
+  return pagination
 }

@@ -1,0 +1,37 @@
+# Configuração AutoRest para tipos obrigatórios
+input-file: api-spec.json
+output-folder: ../
+language: typescript
+generate-metadata: false
+
+# 🎯 CONFIGURAÇÕES PARA TIPOS OBRIGATÓRIOS:
+# Não gerar propriedades como opcionais por padrão
+optional-response-headers: false
+
+# Usar tipos mais estritos
+typescript:
+  # Gerar interfaces mais estritas
+  strict-null-checks: true
+  
+  # Não tornar todas as propriedades opcionais
+  optional-response-headers: false
+  
+  # Configurações para melhor geração de tipos
+  azure-arm: false
+  
+  # Configurações de modelo
+  model-date-time-as-string: true
+  
+  # Configurações de nomeação
+  override-client-name: ApiClient
+  
+  # Não adicionar ? em propriedades que não são nullable
+  property-naming: camelCase
+
+# Configurações adicionais
+add-credentials: true
+use-datetimeoffset: false
+
+# Debugging
+debug: true
+verbose: true

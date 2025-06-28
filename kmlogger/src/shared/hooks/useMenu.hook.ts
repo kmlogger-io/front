@@ -1,34 +1,34 @@
 import { useCallback, useState } from 'react'
 
-export interface MenuAncora {
+export interface MenuAnchor {
   id?: string | number
-  seletor?: string
+  selector?: string
   element: Element
 }
 
 export function useMenu() {
-  const [menuAncora, setarMenuAncora] = useState<MenuAncora | null>(null)
+  const [menuAnchor, setMenuAnchor] = useState<MenuAnchor | null>(null)
 
-  const aoAbrirMenu = useCallback(
-    (event: React.MouseEvent, id: string | number, seletor?: string) => {
+  const openMenu = useCallback(
+    (event: React.MouseEvent, id: string | number, selector?: string) => {
       event.stopPropagation()
-      const elementoAncora = seletor
-        ? event.currentTarget?.closest(seletor)
+      const anchorElement = selector
+        ? event.currentTarget?.closest(selector)
         : event.currentTarget
-      if (elementoAncora)
-        setarMenuAncora({ id, seletor, element: elementoAncora })
+      if (anchorElement)
+        setMenuAnchor({ id, selector, element: anchorElement })
     },
     []
   )
 
-  const aoFecharMenu = useCallback(() => {
-    setarMenuAncora(null)
+  const closeMenu = useCallback(() => {
+    setMenuAnchor(null)
   }, [])
 
   return {
-    menuAncora,
-    setarMenuAncora,
-    aoAbrirMenu,
-    aoFecharMenu,
+    menuAnchor,
+    setMenuAnchor,
+    openMenu,
+    closeMenu,
   }
 }

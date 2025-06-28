@@ -1427,6 +1427,12 @@
   "components": {
     "schemas": {
       "BaseResponse_List_Domain_Records_DTOS_UserDto": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1434,27 +1440,30 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Domain_Records_DTOS_UserDto"
-            },
-            "nullable": true
+            }
           },
           "notifications": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_List_UseCases_App_Read_ReadAll_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1462,27 +1471,30 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UseCases_App_Read_ReadAll_Response"
-            },
-            "nullable": true
+            }
           },
           "notifications": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_List_UseCases_Category_Read_RealAll_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1490,27 +1502,30 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UseCases_Category_Read_RealAll_Response"
-            },
-            "nullable": true
+            }
           },
           "notifications": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_List_UseCases_Log_ReadAllByDate_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1518,27 +1533,30 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UseCases_Log_ReadAllByDate_Response"
-            },
-            "nullable": true
+            }
           },
           "notifications": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_List_UseCases_Log_Read_ReadByApp_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1546,27 +1564,30 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UseCases_Log_Read_ReadByApp_Response"
-            },
-            "nullable": true
+            }
           },
           "notifications": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_System_Object": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1574,23 +1595,25 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
-          "data": {
-            "nullable": true
-          },
+          "data": { },
           "notifications": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_App_Create_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1598,8 +1621,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_App_Create_Response"
@@ -1608,13 +1630,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_Category_Create_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1622,8 +1649,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_Category_Create_Response"
@@ -1632,13 +1658,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_Category_Delete_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1646,8 +1677,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_Category_Delete_Response"
@@ -1656,13 +1686,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_Log_Create_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1670,8 +1705,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_Log_Create_Response"
@@ -1680,13 +1714,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_Log_Read_ReadById_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1694,8 +1733,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_Log_Read_ReadById_Response"
@@ -1704,13 +1742,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_User_Login_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1718,8 +1761,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_User_Login_Response"
@@ -1728,13 +1770,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_User_Logout_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1742,8 +1789,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_User_Logout_Response"
@@ -1752,13 +1798,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_User_RefreshToken_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1766,8 +1817,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_User_RefreshToken_Response"
@@ -1776,13 +1826,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "BaseResponse_UseCases_User_Register_Response": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1790,8 +1845,7 @@
             "format": "int32"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/UseCases_User_Register_Response"
@@ -1800,8 +1854,7 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
@@ -1816,44 +1869,54 @@
         "format": "int32"
       },
       "Domain_Records_DTOS_RoleDto": {
+        "required": [
+          "id",
+          "name",
+          "slug"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "slug": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "Domain_Records_DTOS_UserDto": {
+        "required": [
+          "id",
+          "name",
+          "email",
+          "createdAt",
+          "roles",
+          "active"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "email": {
+            "type": "string"
+          },
+          "createdAt": {
             "type": "string",
-            "nullable": true
+            "format": "date-time"
           },
           "roles": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Domain_Records_DTOS_RoleDto"
-            },
-            "nullable": true
+            }
           },
           "active": {
             "type": "boolean"
@@ -1862,6 +1925,12 @@
         "additionalProperties": false
       },
       "Domain_ValueObjects_FullName": {
+        "required": [
+          "notifications",
+          "isValid",
+          "firstName",
+          "lastName"
+        ],
         "type": "object",
         "properties": {
           "notifications": {
@@ -1869,7 +1938,6 @@
             "items": {
               "$ref": "#/components/schemas/Flunt_Notifications_Notification"
             },
-            "nullable": true,
             "readOnly": true
           },
           "isValid": {
@@ -1877,36 +1945,40 @@
             "readOnly": true
           },
           "firstName": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "lastName": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "Flunt_Notifications_Notification": {
+        "required": [
+          "key",
+          "message"
+        ],
         "type": "object",
         "properties": {
           "key": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UseCases_App_Create_Request": {
+        "required": [
+          "name",
+          "categoryId",
+          "environment"
+        ],
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "categoryId": {
             "type": "string",
@@ -1919,6 +1991,12 @@
         "additionalProperties": false
       },
       "UseCases_App_Create_Response": {
+        "required": [
+          "appId",
+          "name",
+          "categoryName",
+          "environment"
+        ],
         "type": "object",
         "properties": {
           "appId": {
@@ -1926,21 +2004,21 @@
             "format": "uuid"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "categoryName": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "environment": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UseCases_App_Read_ReadAll_Response": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1963,16 +2041,21 @@
         "additionalProperties": false
       },
       "UseCases_Category_Create_Request": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UseCases_Category_Create_Response": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1991,6 +2074,10 @@
         "additionalProperties": false
       },
       "UseCases_Category_Read_RealAll_Response": {
+        "required": [
+          "id",
+          "name"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1998,13 +2085,18 @@
             "format": "uuid"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UseCases_Log_Create_Request": {
+        "required": [
+          "appId",
+          "message",
+          "level",
+          "environment"
+        ],
         "type": "object",
         "properties": {
           "appId": {
@@ -2012,12 +2104,10 @@
             "format": "uuid"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "level": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "stackTrace": {
             "type": "string",
@@ -2034,6 +2124,9 @@
         "additionalProperties": false
       },
       "UseCases_Log_Create_Response": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -2044,6 +2137,13 @@
         "additionalProperties": false
       },
       "UseCases_Log_ReadAllByDate_Response": {
+        "required": [
+          "id",
+          "appId",
+          "message",
+          "level",
+          "createdDate"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -2055,12 +2155,10 @@
             "format": "uuid"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "level": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "createdDate": {
             "type": "string",
@@ -2070,6 +2168,13 @@
         "additionalProperties": false
       },
       "UseCases_Log_Read_ReadByApp_Response": {
+        "required": [
+          "id",
+          "appId",
+          "message",
+          "level",
+          "createdDate"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -2081,12 +2186,10 @@
             "format": "uuid"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "level": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "createdDate": {
             "type": "string",
@@ -2096,6 +2199,13 @@
         "additionalProperties": false
       },
       "UseCases_Log_Read_ReadById_Response": {
+        "required": [
+          "id",
+          "appId",
+          "message",
+          "level",
+          "createdDate"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -2107,12 +2217,10 @@
             "format": "uuid"
           },
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "level": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "createdDate": {
             "type": "string",
@@ -2122,6 +2230,11 @@
         "additionalProperties": false
       },
       "UseCases_User_CompleteRegistration_Request": {
+        "required": [
+          "id",
+          "token",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -2133,36 +2246,42 @@
             "format": "uuid"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UseCases_User_Login_Request": {
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UseCases_User_Login_Response": {
+        "required": [
+          "token",
+          "refreshToken",
+          "tokenExpiry",
+          "refreshTokenExpiry",
+          "user"
+        ],
         "type": "object",
         "properties": {
           "token": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "refreshToken": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "tokenExpiry": {
             "type": "string",
@@ -2179,6 +2298,11 @@
         "additionalProperties": false
       },
       "UseCases_User_Login_UserInfo": {
+        "required": [
+          "id",
+          "name",
+          "email"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -2186,22 +2310,23 @@
             "format": "uuid"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "email": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UseCases_User_Logout_Response": {
+        "required": [
+          "message",
+          "logoutTime"
+        ],
         "type": "object",
         "properties": {
           "message": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "logoutTime": {
             "type": "string",
@@ -2211,29 +2336,35 @@
         "additionalProperties": false
       },
       "UseCases_User_RefreshToken_Request": {
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
         "type": "object",
         "properties": {
           "accessToken": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "refreshToken": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UseCases_User_RefreshToken_Response": {
+        "required": [
+          "token",
+          "refreshToken",
+          "tokenExpiry",
+          "refreshTokenExpiry"
+        ],
         "type": "object",
         "properties": {
           "token": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "refreshToken": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "tokenExpiry": {
             "type": "string",
@@ -2250,22 +2381,25 @@
         "additionalProperties": false
       },
       "UseCases_User_Register_Request": {
+        "required": [
+          "fullName",
+          "email",
+          "rolesId"
+        ],
         "type": "object",
         "properties": {
           "fullName": {
             "$ref": "#/components/schemas/Domain_ValueObjects_FullName"
           },
           "email": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "rolesId": {
             "type": "array",
             "items": {
               "type": "string",
               "format": "uuid"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false

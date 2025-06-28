@@ -2,47 +2,50 @@ import { IconLoader, IconTrash } from '@tabler/icons-react'
 import { Button } from '../../button/button'
 import { ConfirmationModal, type ModalConfirmacaoProps } from '../confirmation/ConfirmationModal'
 
-type Props = Pick<ModalConfirmacaoProps, 'modalAberta' | 'setarModalAberta'> & {
-  pendenteExclusao: boolean
-  excluir: () => Promise<void> | void
-  dataTestIdBotaoExcluir?: string
-  dataTestIdModal?: string
+type Props = Pick<ModalConfirmacaoProps, 'modalOpen' | 'setModalOpen'> & {
+  pendingDeletion: boolean
+  delete: () => Promise<void> | void
+  deleteButtonTestId?: string
+  modalTestId?: string
 }
 
 export default function DeleteModal({
-  excluir,
-  setarModalAberta,
-  modalAberta,
-  pendenteExclusao,
-  dataTestIdBotaoExcluir,
-  dataTestIdModal,
+  delete: deleteAction,
+  setModalOpen,
+  modalOpen,
+  pendingDeletion,
+  deleteButtonTestId,
+  modalTestId,
 }: Props) {
   return (
     <ConfirmationModal
-      data-testid={dataTestIdModal}
-      aoContinuar={excluir}
-      modalAberta={modalAberta}
-      setarModalAberta={setarModalAberta}
-      corBackground="bg-extra-destructive"
-      corTitulo="text-extra-destructive"
-      varianteBotao="destructive"
-      iconeTitulo={<IconTrash size={52} className="text-secondary" />}
-      titulo="Excluir"
-      descricao="A exclusão é irreversível e pode afetar outros serviços. Deseja prosseguir com a ação de excluir?"
-      botoes={
+      data-testid={modalTestId}
+      onContinue={() => {
+        deleteAction()
+        setModalOpen(false)
+      }}
+      modalOpen={modalOpen}
+      setModalOpen={setModalOpen}
+      backgroundColor="bg-extra-destructive"
+      titleColor="text-extra-destructive"
+      buttonVariant="destructive"
+      titleIcon={<IconTrash size={52} className="text-secondary" />}
+      title="Delete"
+      description="Deletion is irreversible and may affect other services. Do you want to proceed with the delete action?"
+      buttons={
         <Button
           variant="extraDestructive"
-          data-testid={dataTestIdBotaoExcluir}
+          data-testid={deleteButtonTestId}
           onClick={async () => {
-            await excluir()
-            setarModalAberta(false)
+            await deleteAction()
+            setModalOpen(false)
           }}
           className="px-4 py-2"
         >
-          {pendenteExclusao && (
+          {pendingDeletion && (
             <IconLoader className="animate-spin mr-2 h-4 w-4" />
           )}
-          {!pendenteExclusao && 'Confirmar'}
+          {!pendingDeletion && 'Confirm'}
         </Button>
       }
     />

@@ -111,7 +111,7 @@ export function FormBuilder<T extends FieldValues>({
                 <Typography
                   key={index}
                   component="a"
-                  onClick={() => !isLoading && handleNavigation(link.path)} // Previne navegação durante loading
+                  onClick={() => !isLoading && handleNavigation(link.path)} 
                   sx={{
                     cursor: isLoading ? 'not-allowed' : 'pointer',
                     opacity: isLoading ? 0.5 : 1,

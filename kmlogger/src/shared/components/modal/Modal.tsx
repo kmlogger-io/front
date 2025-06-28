@@ -6,63 +6,63 @@ import BasicTitle from '../titles/BasicTitle'
 import ButtonClose from './buttons/ButtonClose'
 
 interface Props {
-  iconeTitulo?: ReactElement<any>
-  titulo: string
-  descricao: ReactElement<any>
-  aoContinuar: () => void
-  aoFechar: () => void
-  botoes?: ReactElement<any>
-  corBackground?: string
-  corTitulo?: string
-  corIcone?: string
-  varianteBotao?: ButtonProps['variant']
+  titleIcon?: ReactElement<any>
+  title: string
+  description: ReactElement<any>
+  onContinue: () => void
+  onClose: () => void
+  buttons?: ReactElement<any>
+  backgroundColor?: string
+  titleColor?: string
+  iconColor?: string
+  buttonVariant?: ButtonProps['variant']
 }
 
 export default function Modal({
-  aoFechar,
-  aoContinuar,
-  corIcone,
-  iconeTitulo,
-  titulo,
-  descricao,
-  botoes,
-  corTitulo,
-  corBackground,
-  varianteBotao,
+  onClose,
+  onContinue,
+  iconColor,
+  titleIcon,
+  title,
+  description,
+  buttons,
+  titleColor,
+  backgroundColor,
+  buttonVariant,
 }: Props) {
   return (
     <div className="flex flex-col justify-center items-center w-full gap-3 relative">
       <div
         className={classNames(
           'rounded-[5rem] w-24 h-24 flex items-center justify-center shadow-elevation-medium absolute -top-14 z-index-[2000]',
-          corBackground ?? 'bg-primary'
+          backgroundColor ?? 'bg-primary'
         )}
       >
-        {iconeTitulo ?? (
+        {titleIcon ?? (
           <IconLogout
-            className={corIcone ?? 'text-primary-foreground'}
+            className={iconColor ?? 'text-primary-foreground'}
             size={52}
           />
         )}
       </div>
-      <div className="absolute -right-3 -top-3" onClick={aoFechar}>
+      <div className="absolute -right-3 -top-3" onClick={onClose}>
         <ButtonClose />
       </div>
       <BasicTitle
-        titulo={titulo}
+        title={title}
         className={classNames(
           '~text-2xl/4xl font-medium mt-12',
-          corTitulo ?? 'text-primary'
+          titleColor ?? 'text-primary'
         )}
       />
-      {descricao}
-      {botoes ?? (
+      {description}
+      {buttons ?? (
         <Button
-          variant={varianteBotao}
+          variant={buttonVariant}
           className="px-4 py-1 mb-2"
-          onClick={aoContinuar}
+          onClick={onContinue}
         >
-          Continuar
+          Continue
         </Button>
       )}
     </div>

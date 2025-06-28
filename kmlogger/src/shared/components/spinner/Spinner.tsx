@@ -1,23 +1,23 @@
 import { Box, CircularProgress, Typography, Fade } from '@mui/material'
 
-interface CarregandoSpinnerProps {
-  texto?: string
+interface LoadingSpinnerProps {
+  text?: string
   show?: boolean
 }
 
-export default function CarregandoSpinner({ texto, show = true }: CarregandoSpinnerProps) {
+export default function LoadingSpinner({ text, show = true }: LoadingSpinnerProps) {
   return (
     <Fade in={show} timeout={200}>
-      <Box 
-        display="flex" 
-        alignItems="center" 
-        justifyContent="center" 
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
         gap={1}
       >
         <CircularProgress size={16} />
-        {texto && (
+        {text && (
           <Typography variant="body2">
-            {texto}
+            {text}
           </Typography>
         )}
       </Box>

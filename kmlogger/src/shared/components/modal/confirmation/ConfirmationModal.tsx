@@ -7,38 +7,38 @@ import VisuallyHide from '../../visually-hidden/VisualyHide'
 import { Dialog, DialogContent, DialogFooter, DialogTitle } from '../../dialog/Dialog'
 
 interface Props {
-  'modalAberta': boolean
-  'setarModalAberta': (val: boolean) => void
-  'descricao': string
-  'titulo': string
-  'aoContinuar': () => void
-  'corBackground'?: string
-  'corTitulo'?: string
-  'corIcone'?: string
-  'varianteBotao'?: ButtonProps['variant']
-  'botoes'?: ReactElement<any>
-  'iconeTitulo'?: ReactElement<any>
+  'modalOpen': boolean
+  'setModalOpen': (val: boolean) => void
+  'description': string
+  'title': string
+  'onContinue': () => void
+  'backgroundColor'?: string
+  'titleColor'?: string
+  'iconColor'?: string
+  'buttonVariant'?: ButtonProps['variant']
+  'buttons'?: ReactElement<any>
+  'titleIcon'?: ReactElement<any>
   'data-testid'?: string
 }
 
 export type ModalConfirmacaoProps = Props
 
 export function ConfirmationModal({
-  iconeTitulo,
-  botoes,
-  corIcone,
-  corTitulo,
-  modalAberta,
-  setarModalAberta,
-  descricao,
-  titulo,
-  aoContinuar,
-  corBackground,
-  varianteBotao,
+  titleIcon,
+  buttons,
+  iconColor,
+  titleColor,
+  modalOpen,
+  setModalOpen,
+  description,
+  title,
+  onContinue,
+  backgroundColor,
+  buttonVariant,
   'data-testid': dataTestid,
 }: Props) {
   return (
-    <Dialog open={modalAberta} onOpenChange={setarModalAberta}>
+    <Dialog open={modalOpen} onOpenChange={setModalOpen}>
       <DialogContent
         data-testid={dataTestid}
         className={classNames(
@@ -50,17 +50,17 @@ export function ConfirmationModal({
           <DialogTitle></DialogTitle>
         </VisuallyHide>
         <Modal
-          descricao={<div className="text-center font-light">{descricao}</div>}
-          iconeTitulo={iconeTitulo}
-          titulo={titulo}
-          corBackground={corBackground}
-          corIcone={corIcone}
-          corTitulo={corTitulo}
-          varianteBotao={varianteBotao}
-          botoes={botoes}
-          aoContinuar={aoContinuar}
-          aoFechar={() => {
-            setarModalAberta(false)
+          description={<div className="text-center font-light">{description}</div>}
+          titleIcon={titleIcon}
+          title={title}
+          backgroundColor={backgroundColor}
+          iconColor={iconColor}
+          titleColor={titleColor}
+          buttonVariant={buttonVariant}
+          buttons={buttons}
+          onContinue={onContinue}
+          onClose={() => {
+            setModalOpen(false)
           }}
         />
         <DialogFooter>

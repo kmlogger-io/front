@@ -8,119 +8,119 @@ import {
 } from '@tabler/icons-react'
 import { useMenu } from '../../../../hooks/useMenu.hook'
 
-type TipoBotao = 'visualizar' | 'editar' | 'excluir'
+type ButtonType = 'view' | 'edit' | 'delete'
 
-const BOTOES_PADRAO_MUTAVEL: TipoBotao[] = ['visualizar', 'editar', 'excluir']
+const DEFAULT_MUTABLE_BUTTONS: ButtonType[] = ['view', 'edit', 'delete']
 
-function formatarDataTestId(baseTestId: string, idItem?: string): string {
-  return idItem ? `${baseTestId}-${idItem}` : baseTestId
+function formatTestId(baseTestId: string, itemId?: string): string {
+  return itemId ? `${baseTestId}-${itemId}` : baseTestId
 }
 
 interface Props {
-  idItem?: string
-  visualizar?: () => void
-  editar?: () => void
-  excluir?: () => void
-  estaPendenteExclusao: boolean
-  abrirModalExclusao: (val: boolean) => void
-  botaoVisualizarTestId?: string
-  botaoEditarTestId?: string
-  botaoExcluirTestId?: string
-  mostrarBotoes?: TipoBotao[]
-  iconeVisualizar?: React.ComponentType<any>
-  iconeEditar?: React.ComponentType<any>
-  iconeExcluir?: React.ComponentType<any>
-  tituloIconeVisualizar?: string
-  tituloIconeEditar?: string
-  tituloIconeExcluir?: string
-  botoesAdicionaisAcoesTabela?:
+  itemId?: string
+  view?: () => void
+  edit?: () => void
+  delete?: () => void
+  isPendingDeletion: boolean
+  openDeleteModal: (val: boolean) => void
+  viewButtonTestId?: string
+  editButtonTestId?: string
+  deleteButtonTestId?: string
+  showButtons?: ButtonType[]
+  viewIcon?: React.ComponentType<any>
+  editIcon?: React.ComponentType<any>
+  deleteIcon?: React.ComponentType<any>
+  viewIconTitle?: string
+  editIconTitle?: string
+  deleteIconTitle?: string
+  additionalTableActionButtons?:
     | React.ReactNode
     | ((id: string | undefined) => React.ReactNode)
-  deveExibirItemMenu?: () => boolean
+  shouldShowMenuItem?: () => boolean
 }
 
 export default function ButtonActions({
-  idItem,
-  visualizar,
-  editar,
-  excluir,
-  estaPendenteExclusao,
-  abrirModalExclusao,
-  botaoVisualizarTestId,
-  botaoEditarTestId,
-  botaoExcluirTestId,
-  mostrarBotoes = BOTOES_PADRAO_MUTAVEL,
-  iconeVisualizar: IconeVisualizar = IconEye,
-  iconeEditar: IconeEditar = IconPencil,
-  iconeExcluir: IconeExcluir = IconTrash,
-  tituloIconeVisualizar = 'Visualizar',
-  tituloIconeEditar = 'Editar',
-  tituloIconeExcluir = 'Excluir',
-  botoesAdicionaisAcoesTabela,
-  deveExibirItemMenu,
+  itemId,
+  view,
+  edit,
+  delete: deleteAction,
+  isPendingDeletion,
+  openDeleteModal,
+  viewButtonTestId,
+  editButtonTestId,
+  deleteButtonTestId,
+  showButtons = DEFAULT_MUTABLE_BUTTONS,
+  viewIcon: ViewIcon = IconEye,
+  editIcon: EditIcon = IconPencil,
+  deleteIcon: DeleteIcon = IconTrash,
+  viewIconTitle = 'View',
+  editIconTitle = 'Edit',
+  deleteIconTitle = 'Delete',
+  additionalTableActionButtons,
+  shouldShowMenuItem,
 }: Props) {
-  const { menuAncora, aoAbrirMenu, aoFecharMenu } = useMenu()
+  const { menuAnchor, openMenu, closeMenu } = useMenu()
 
-  const menuAberto = menuAncora?.id === idItem
+  const menuOpen = menuAnchor?.id === itemId
 
   const handleClick = (event: React.MouseEvent<SVGSVGElement>) => {
-    if (idItem) {
-      aoAbrirMenu(event, idItem)
+    if (itemId) {
+      openMenu(event, itemId)
     }
   }
 
-  const handleMenuItemClick = (acao: () => void) => {
-    acao()
-    aoFecharMenu()
+  const handleMenuItemClick = (action: () => void) => {
+    action()
+    closeMenu()
   }
 
-  const deveExibirBotao = (botao: TipoBotao): boolean => {
-    if (deveExibirItemMenu && !deveExibirItemMenu()) {
+  const shouldShowButton = (button: ButtonType): boolean => {
+    if (shouldShowMenuItem && !shouldShowMenuItem()) {
       return false
     }
 
-    switch (botao) {
-      case 'visualizar':
-        return !!visualizar
-      case 'editar':
-        return !!editar && !estaPendenteExclusao
-      case 'excluir':
-        return !estaPendenteExclusao
+    switch (button) {
+      case 'view':
+        return !!view
+      case 'edit':
+        return !!edit && !isPendingDeletion
+      case 'delete':
+        return !isPendingDeletion
       default:
         return true
     }
   }
 
-  const botoesVisiveis = mostrarBotoes.filter(deveExibirBotao)
-  const totalBotoes =
-    botoesVisiveis.length + (botoesAdicionaisAcoesTabela ? 1 : 0)
-  const usarMenuDropdown = totalBotoes >= 3
+  const visibleButtons = showButtons.filter(shouldShowButton)
+  const totalButtons =
+    visibleButtons.length + (additionalTableActionButtons ? 1 : 0)
+  const useDropdownMenu = totalButtons >= 3
 
-  if (usarMenuDropdown) {
+  if (useDropdownMenu) {
     return (
       <div className="flex items-center gap-2 justify-center">
-        {estaPendenteExclusao ? (
+        {isPendingDeletion ? (
           <IconLoader2 className="animate-spin mr-2 h-4 w-4" />
         ) : (
           <>
-            <Tooltip title="Mais ações" arrow>
+            <Tooltip title="More actions" arrow>
               <IconDotsVertical
                 role="button"
                 size={18}
                 className="cursor-pointer"
                 onClick={handleClick}
-                data-testid={formatarDataTestId(
-                  'botao-opcoes-acoes-tabela',
-                  idItem
+                data-testid={formatTestId(
+                  'table-actions-options-button',
+                  itemId
                 )}
               />
             </Tooltip>
 
-            {menuAncora?.element && (
+            {menuAnchor?.element && (
               <Menu
-                anchorEl={menuAncora.element as HTMLElement}
-                open={menuAberto}
-                onClose={aoFecharMenu}
+                anchorEl={menuAnchor.element as HTMLElement}
+                open={menuOpen}
+                onClose={closeMenu}
                 anchorOrigin={{
                   vertical: 'bottom',
                   horizontal: 'right',
@@ -130,61 +130,61 @@ export default function ButtonActions({
                   horizontal: 'right',
                 }}
               >
-                {botoesAdicionaisAcoesTabela && (
+                {additionalTableActionButtons && (
                   <div className="px-2 py-1">
-                    {typeof botoesAdicionaisAcoesTabela === 'function'
-                      ? botoesAdicionaisAcoesTabela(idItem)
-                      : botoesAdicionaisAcoesTabela}
+                    {typeof additionalTableActionButtons === 'function'
+                      ? additionalTableActionButtons(itemId)
+                      : additionalTableActionButtons}
                   </div>
                 )}
 
-                {deveExibirBotao('visualizar') &&
-                  mostrarBotoes.includes('visualizar') && (
+                {shouldShowButton('view') &&
+                  showButtons.includes('view') && (
                     <MenuItem
-                      onClick={() => handleMenuItemClick(visualizar!)}
+                      onClick={() => handleMenuItemClick(view!)}
                       data-testid={
-                        botaoVisualizarTestId ||
-                        formatarDataTestId('menu-item-visualizar', idItem)
+                        viewButtonTestId ||
+                        formatTestId('menu-item-view', itemId)
                       }
                     >
-                      <IconeVisualizar size={16} className="mr-2" />
-                      {tituloIconeVisualizar}
+                      <ViewIcon size={16} className="mr-2" />
+                      {viewIconTitle}
                     </MenuItem>
                   )}
 
-                {deveExibirBotao('editar') &&
-                  mostrarBotoes.includes('editar') && (
+                {shouldShowButton('edit') &&
+                  showButtons.includes('edit') && (
                     <MenuItem
-                      onClick={() => handleMenuItemClick(editar!)}
+                      onClick={() => handleMenuItemClick(edit!)}
                       data-testid={
-                        botaoEditarTestId ||
-                        formatarDataTestId('menu-item-editar', idItem)
+                        editButtonTestId ||
+                        formatTestId('menu-item-edit', itemId)
                       }
                     >
-                      <IconeEditar size={16} className="mr-2" />
-                      {tituloIconeEditar}
+                      <EditIcon size={16} className="mr-2" />
+                      {editIconTitle}
                     </MenuItem>
                   )}
 
-                {deveExibirBotao('excluir') &&
-                  mostrarBotoes.includes('excluir') && (
+                {shouldShowButton('delete') &&
+                  showButtons.includes('delete') && (
                     <MenuItem
                       onClick={() =>
                         handleMenuItemClick(() => {
-                          if (excluir) {
-                            excluir()
+                          if (deleteAction) {
+                            deleteAction()
                           } else {
-                            abrirModalExclusao(true)
+                            openDeleteModal(true)
                           }
                         })
                       }
                       data-testid={
-                        botaoExcluirTestId ||
-                        formatarDataTestId('menu-item-excluir', idItem)
+                        deleteButtonTestId ||
+                        formatTestId('menu-item-delete', itemId)
                       }
                     >
-                      <IconeExcluir size={16} className="mr-2" />
-                      {tituloIconeExcluir}
+                      <DeleteIcon size={16} className="mr-2" />
+                      {deleteIconTitle}
                     </MenuItem>
                   )}
               </Menu>
@@ -197,47 +197,47 @@ export default function ButtonActions({
 
   return (
     <div className="flex items-center justify-center gap-2">
-      {typeof botoesAdicionaisAcoesTabela === 'function'
-        ? botoesAdicionaisAcoesTabela(idItem)
-        : botoesAdicionaisAcoesTabela}
+      {typeof additionalTableActionButtons === 'function'
+        ? additionalTableActionButtons(itemId)
+        : additionalTableActionButtons}
 
-      {deveExibirBotao('editar') && mostrarBotoes.includes('editar') && (
-        <Tooltip title={tituloIconeEditar} arrow>
-          <IconeEditar
+      {shouldShowButton('edit') && showButtons.includes('edit') && (
+        <Tooltip title={editIconTitle} arrow>
+          <EditIcon
             role="button"
-            onClick={editar}
+            onClick={edit}
             size={18}
             className="text-primary cursor-pointer"
             data-testid={
-              botaoEditarTestId ||
-              formatarDataTestId('botao-acoes-tabela-editar', idItem)
+              editButtonTestId ||
+              formatTestId('table-actions-edit-button', itemId)
             }
           />
         </Tooltip>
       )}
 
-      {deveExibirBotao('excluir') && mostrarBotoes.includes('excluir') && (
-        <Tooltip title={tituloIconeExcluir} arrow>
-          <IconeExcluir
+      {shouldShowButton('delete') && showButtons.includes('delete') && (
+        <Tooltip title={deleteIconTitle} arrow>
+          <DeleteIcon
             role="button"
             onClick={() => {
-              if (excluir) {
-                excluir()
+              if (deleteAction) {
+                deleteAction()
               } else {
-                abrirModalExclusao(true)
+                openDeleteModal(true)
               }
             }}
             size={18}
             className="text-primary cursor-pointer"
             data-testid={
-              botaoExcluirTestId ||
-              formatarDataTestId('botao-acoes-tabela-excluir', idItem)
+              deleteButtonTestId ||
+              formatTestId('table-actions-delete-button', itemId)
             }
           />
         </Tooltip>
       )}
 
-      {estaPendenteExclusao && (
+      {isPendingDeletion && (
         <IconLoader2 className="animate-spin mr-2 h-4 w-4" />
       )}
     </div>

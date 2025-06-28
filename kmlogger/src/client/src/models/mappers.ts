@@ -7,19 +7,21 @@ export const UseCasesAppCreateRequest: coreClient.CompositeMapper = {
     modelProperties: {
       name: {
         serializedName: "name",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       categoryId: {
         serializedName: "categoryId",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       environment: {
         serializedName: "environment",
+        required: true,
         type: {
           name: "Number",
         },
@@ -36,13 +38,14 @@ export const BaseResponseUseCasesAppCreateResponse: coreClient.CompositeMapper =
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
@@ -56,7 +59,7 @@ export const BaseResponseUseCasesAppCreateResponse: coreClient.CompositeMapper =
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -78,27 +81,28 @@ export const UseCasesAppCreateResponse: coreClient.CompositeMapper = {
     modelProperties: {
       appId: {
         serializedName: "appId",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       name: {
         serializedName: "name",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       categoryName: {
         serializedName: "categoryName",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       environment: {
         serializedName: "environment",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -114,14 +118,14 @@ export const FluntNotificationsNotification: coreClient.CompositeMapper = {
     modelProperties: {
       key: {
         serializedName: "key",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       message: {
         serializedName: "message",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -137,27 +141,28 @@ export const BaseResponseSystemObject: coreClient.CompositeMapper = {
     modelProperties: {
       statusCode: {
         serializedName: "statusCode",
+        required: true,
         type: {
           name: "Number",
         },
       },
       message: {
         serializedName: "message",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       data: {
         serializedName: "data",
-        nullable: true,
+        required: true,
         type: {
           name: "any",
         },
       },
       notifications: {
         serializedName: "notifications",
-        nullable: true,
+        required: true,
         type: {
           name: "Sequence",
           element: {
@@ -180,20 +185,21 @@ export const BaseResponseListUseCasesAppReadAllResponse: coreClient.CompositeMap
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
         },
         data: {
           serializedName: "data",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -206,7 +212,7 @@ export const BaseResponseListUseCasesAppReadAllResponse: coreClient.CompositeMap
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -228,6 +234,7 @@ export const UseCasesAppReadAllResponse: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
+        required: true,
         type: {
           name: "Uuid",
         },
@@ -264,7 +271,7 @@ export const UseCasesCategoryCreateRequest: coreClient.CompositeMapper = {
     modelProperties: {
       name: {
         serializedName: "name",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -281,13 +288,14 @@ export const BaseResponseUseCasesCategoryCreateResponse: coreClient.CompositeMap
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
@@ -301,7 +309,7 @@ export const BaseResponseUseCasesCategoryCreateResponse: coreClient.CompositeMap
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -323,6 +331,7 @@ export const UseCasesCategoryCreateResponse: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
+        required: true,
         type: {
           name: "Uuid",
         },
@@ -346,19 +355,21 @@ export const BaseResponseUseCasesCategoryDeleteResponse: coreClient.CompositeMap
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
         },
         data: {
           serializedName: "data",
+          required: true,
           type: {
             name: "Dictionary",
             value: { type: { name: "any" } },
@@ -366,7 +377,7 @@ export const BaseResponseUseCasesCategoryDeleteResponse: coreClient.CompositeMap
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -389,20 +400,21 @@ export const BaseResponseListUseCasesCategoryReadRealAllResponse: coreClient.Com
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
         },
         data: {
           serializedName: "data",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -415,7 +427,7 @@ export const BaseResponseListUseCasesCategoryReadRealAllResponse: coreClient.Com
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -437,13 +449,14 @@ export const UseCasesCategoryReadRealAllResponse: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       name: {
         serializedName: "name",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -459,20 +472,21 @@ export const UseCasesLogCreateRequest: coreClient.CompositeMapper = {
     modelProperties: {
       appId: {
         serializedName: "appId",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       message: {
         serializedName: "message",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       level: {
         serializedName: "level",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -493,6 +507,7 @@ export const UseCasesLogCreateRequest: coreClient.CompositeMapper = {
       },
       environment: {
         serializedName: "environment",
+        required: true,
         type: {
           name: "Number",
         },
@@ -509,13 +524,14 @@ export const BaseResponseUseCasesLogCreateResponse: coreClient.CompositeMapper =
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
@@ -529,7 +545,7 @@ export const BaseResponseUseCasesLogCreateResponse: coreClient.CompositeMapper =
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -551,6 +567,7 @@ export const UseCasesLogCreateResponse: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
+        required: true,
         type: {
           name: "Uuid",
         },
@@ -567,20 +584,21 @@ export const BaseResponseListUseCasesLogReadAllByDateResponse: coreClient.Compos
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
         },
         data: {
           serializedName: "data",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -593,7 +611,7 @@ export const BaseResponseListUseCasesLogReadAllByDateResponse: coreClient.Compos
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -615,32 +633,35 @@ export const UseCasesLogReadAllByDateResponse: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       appId: {
         serializedName: "appId",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       message: {
         serializedName: "message",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       level: {
         serializedName: "level",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       createdDate: {
         serializedName: "createdDate",
+        required: true,
         type: {
           name: "DateTime",
         },
@@ -657,20 +678,21 @@ export const BaseResponseListUseCasesLogReadByAppResponse: coreClient.CompositeM
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
         },
         data: {
           serializedName: "data",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -683,7 +705,7 @@ export const BaseResponseListUseCasesLogReadByAppResponse: coreClient.CompositeM
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -705,32 +727,35 @@ export const UseCasesLogReadByAppResponse: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       appId: {
         serializedName: "appId",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       message: {
         serializedName: "message",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       level: {
         serializedName: "level",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       createdDate: {
         serializedName: "createdDate",
+        required: true,
         type: {
           name: "DateTime",
         },
@@ -747,13 +772,14 @@ export const BaseResponseUseCasesLogReadByIdResponse: coreClient.CompositeMapper
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
@@ -767,7 +793,7 @@ export const BaseResponseUseCasesLogReadByIdResponse: coreClient.CompositeMapper
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -789,32 +815,35 @@ export const UseCasesLogReadByIdResponse: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       appId: {
         serializedName: "appId",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       message: {
         serializedName: "message",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       level: {
         serializedName: "level",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       createdDate: {
         serializedName: "createdDate",
+        required: true,
         type: {
           name: "DateTime",
         },
@@ -830,14 +859,14 @@ export const UseCasesUserLoginRequest: coreClient.CompositeMapper = {
     modelProperties: {
       email: {
         serializedName: "email",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       password: {
         serializedName: "password",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -854,13 +883,14 @@ export const BaseResponseUseCasesUserLoginResponse: coreClient.CompositeMapper =
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
@@ -874,7 +904,7 @@ export const BaseResponseUseCasesUserLoginResponse: coreClient.CompositeMapper =
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -896,26 +926,28 @@ export const UseCasesUserLoginResponse: coreClient.CompositeMapper = {
     modelProperties: {
       token: {
         serializedName: "token",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       refreshToken: {
         serializedName: "refreshToken",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       tokenExpiry: {
         serializedName: "tokenExpiry",
+        required: true,
         type: {
           name: "DateTime",
         },
       },
       refreshTokenExpiry: {
         serializedName: "refreshTokenExpiry",
+        required: true,
         type: {
           name: "DateTime",
         },
@@ -938,20 +970,21 @@ export const UseCasesUserLoginUserInfo: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
+        required: true,
         type: {
           name: "Uuid",
         },
       },
       name: {
         serializedName: "name",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       email: {
         serializedName: "email",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -967,14 +1000,14 @@ export const UseCasesUserRefreshTokenRequest: coreClient.CompositeMapper = {
     modelProperties: {
       accessToken: {
         serializedName: "accessToken",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       refreshToken: {
         serializedName: "refreshToken",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -991,13 +1024,14 @@ export const BaseResponseUseCasesUserRefreshTokenResponse: coreClient.CompositeM
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
@@ -1011,7 +1045,7 @@ export const BaseResponseUseCasesUserRefreshTokenResponse: coreClient.CompositeM
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -1033,26 +1067,28 @@ export const UseCasesUserRefreshTokenResponse: coreClient.CompositeMapper = {
     modelProperties: {
       token: {
         serializedName: "token",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       refreshToken: {
         serializedName: "refreshToken",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       tokenExpiry: {
         serializedName: "tokenExpiry",
+        required: true,
         type: {
           name: "DateTime",
         },
       },
       refreshTokenExpiry: {
         serializedName: "refreshTokenExpiry",
+        required: true,
         type: {
           name: "DateTime",
         },
@@ -1076,13 +1112,14 @@ export const BaseResponseUseCasesUserLogoutResponse: coreClient.CompositeMapper 
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
@@ -1096,7 +1133,7 @@ export const BaseResponseUseCasesUserLogoutResponse: coreClient.CompositeMapper 
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -1118,13 +1155,14 @@ export const UseCasesUserLogoutResponse: coreClient.CompositeMapper = {
     modelProperties: {
       message: {
         serializedName: "message",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       logoutTime: {
         serializedName: "logoutTime",
+        required: true,
         type: {
           name: "DateTime",
         },
@@ -1147,14 +1185,14 @@ export const UseCasesUserRegisterRequest: coreClient.CompositeMapper = {
       },
       email: {
         serializedName: "email",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       rolesId: {
         serializedName: "rolesId",
-        nullable: true,
+        required: true,
         type: {
           name: "Sequence",
           element: {
@@ -1175,8 +1213,8 @@ export const DomainValueObjectsFullName: coreClient.CompositeMapper = {
     modelProperties: {
       notifications: {
         serializedName: "notifications",
+        required: true,
         readOnly: true,
-        nullable: true,
         type: {
           name: "Sequence",
           element: {
@@ -1189,6 +1227,7 @@ export const DomainValueObjectsFullName: coreClient.CompositeMapper = {
       },
       isValid: {
         serializedName: "isValid",
+        required: true,
         readOnly: true,
         type: {
           name: "Boolean",
@@ -1196,14 +1235,14 @@ export const DomainValueObjectsFullName: coreClient.CompositeMapper = {
       },
       firstName: {
         serializedName: "firstName",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       lastName: {
         serializedName: "lastName",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -1220,19 +1259,21 @@ export const BaseResponseUseCasesUserRegisterResponse: coreClient.CompositeMappe
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
         },
         data: {
           serializedName: "data",
+          required: true,
           type: {
             name: "Dictionary",
             value: { type: { name: "any" } },
@@ -1240,7 +1281,7 @@ export const BaseResponseUseCasesUserRegisterResponse: coreClient.CompositeMappe
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -1263,20 +1304,21 @@ export const BaseResponseListDomainRecordsDtosUserDto: coreClient.CompositeMappe
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
+          required: true,
           type: {
             name: "Number",
           },
         },
         message: {
           serializedName: "message",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },
         },
         data: {
           serializedName: "data",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -1289,7 +1331,7 @@ export const BaseResponseListDomainRecordsDtosUserDto: coreClient.CompositeMappe
         },
         notifications: {
           serializedName: "notifications",
-          nullable: true,
+          required: true,
           type: {
             name: "Sequence",
             element: {
@@ -1311,28 +1353,35 @@ export const DomainRecordsDtosUserDto: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       name: {
         serializedName: "name",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       email: {
         serializedName: "email",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
+      createdAt: {
+        serializedName: "createdAt",
+        required: true,
+        type: {
+          name: "DateTime",
+        },
+      },
       roles: {
         serializedName: "roles",
-        nullable: true,
+        required: true,
         type: {
           name: "Sequence",
           element: {
@@ -1345,6 +1394,7 @@ export const DomainRecordsDtosUserDto: coreClient.CompositeMapper = {
       },
       active: {
         serializedName: "active",
+        required: true,
         type: {
           name: "Boolean",
         },
@@ -1360,21 +1410,21 @@ export const DomainRecordsDtosRoleDto: coreClient.CompositeMapper = {
     modelProperties: {
       id: {
         serializedName: "id",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       name: {
         serializedName: "name",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
       },
       slug: {
         serializedName: "slug",
-        nullable: true,
+        required: true,
         type: {
           name: "String",
         },
@@ -1391,19 +1441,21 @@ export const UseCasesUserCompleteRegistrationRequest: coreClient.CompositeMapper
       modelProperties: {
         id: {
           serializedName: "id",
+          required: true,
           type: {
             name: "Uuid",
           },
         },
         token: {
           serializedName: "token",
+          required: true,
           type: {
             name: "Uuid",
           },
         },
         password: {
           serializedName: "password",
-          nullable: true,
+          required: true,
           type: {
             name: "String",
           },

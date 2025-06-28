@@ -3,32 +3,32 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { twMerge } from 'tailwind-merge'
 import { animacaoFadeDown } from '../../../animations/fade-down.animation'
 import ErrorBoundary from '../../boundaries/ErrorBoundary'
-import Spinner from '../../spinner/Spinner'
+import LoadingSpinner from '../../spinner/Spinner'
 
-interface CarregandoQueryProps {
-  'estaCarregando': boolean
-  'estaComErro': boolean
-  'erro'?: Error | null
+interface LoadingQueryProps {
+  'isLoading': boolean
+  'hasError': boolean
+  'error'?: Error | null
   'children': ReactNode
-  'animacao'?: typeof animacaoFadeDown
+  'animation'?: typeof animacaoFadeDown
   'className'?: string
   'containerClassName'?: string
-  'carregandoClassName'?: string
+  'loadingClassName'?: string
   'data-testid'?: string
 }
 
 export function LoadingQuery({
-  estaCarregando,
-  estaComErro,
-  erro,
+  isLoading,
+  hasError,
+  error,
   children,
-  animacao = animacaoFadeDown,
+  animation = animacaoFadeDown,
   className = '',
   containerClassName,
-  carregandoClassName = '',
+  loadingClassName = '',
   'data-testid': dataTestId,
-}: CarregandoQueryProps) {
-  if (estaComErro) throw new Error(erro ?.message || 'Erro desconhecido durante a consulta')
+}: LoadingQueryProps) {
+  if (hasError) throw new Error(error?.message || 'Unknown error during query')
 
   return (
     <div
@@ -36,26 +36,25 @@ export function LoadingQuery({
       data-testid={dataTestId}
     >
       <AnimatePresence mode="wait">
-        {estaCarregando && (
+        {isLoading && (
           <motion.div
-            key="carregando-estado"
-            data-testid="query-carregando-estado"
+            key="loading-state"
+            data-testid="query-loading-state"
             className={twMerge(
               'w-full h-full absolute inset-0 flex items-center justify-center',
-              carregandoClassName
+              loadingClassName
             )}
-            {...animacao}
+            {...animation}
             exit={{ opacity: 0 }}
           >
-            <Spinner />
+            <LoadingSpinner />
           </motion.div>
         )}
-
-        {!estaCarregando && !estaComErro && (
+        {!isLoading && !hasError && (
           <motion.div
-            key="conteudo-estado"
+            key="content-state"
             className={twMerge('w-full h-full', className)}
-            {...animacao}
+            {...animation}
             exit={{ opacity: 0 }}
           >
             {children}
@@ -66,7 +65,7 @@ export function LoadingQuery({
   )
 }
 
-export default function LoadingQueryBoundary(props: CarregandoQueryProps) {
+export default function LoadingQueryBoundary(props: LoadingQueryProps) {
   return (
     <ErrorBoundary>
       <LoadingQuery {...props} />

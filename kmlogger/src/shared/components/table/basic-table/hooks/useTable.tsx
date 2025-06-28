@@ -1,111 +1,103 @@
 import type { AccessorColumnDef } from '@tanstack/react-table'
 import { useState } from 'react'
-import { useSnackbar } from '../../../../hooks/useSnackbar.hook'
 import ButtonActions from '../components/ButtonActions'
 
-interface UseTabelaProps<T extends { id: string }> {
-  dados: T[]
-  colunasExtras: AccessorColumnDef<T, any>[]
-  excluirMutation: {
+interface UseTableProps<T extends { id: string }> {
+  data: T[]
+  extraColumns: AccessorColumnDef<T, any>[]
+  deleteMutation: {
     mutateAsync: (params: { id: string }) => Promise<any>
     isPending: boolean
   }
-  aoEditar?: (item: T) => void
-  aoVisualizar?: (item: T) => void
-  aoExcluir?: (id: string) => void
-  aoExcluirSucesso?: () => void
-  aoExcluirErro?: (error: any) => void
-  tituloIconeExcluir?: string
-  deveExibirItemMenu?: (id: string) => boolean
-  mostrarBotoes?: ('editar' | 'excluir' | 'visualizar')[]
-  botoesAdicionaisAcoesTabela?:
+  onEdit?: (item: T) => void
+  onView?: (item: T) => void
+  onDelete?: (id: string) => void
+  onDeleteSuccess?: () => void
+  onDeleteError?: (error: any) => void
+  deleteIconTitle?: string
+  shouldShowMenuItem?: (id: string) => boolean
+  showButtons?: ('edit' | 'delete' | 'view')[]
+  additionalTableActionButtons?:
     | React.ReactNode
     | ((id: string | undefined) => React.ReactNode)
 }
 
 export function useTable<T extends { id: string }>({
-  dados,
-  colunasExtras,
-  excluirMutation,
-  aoEditar,
-  aoVisualizar,
-  aoExcluir,
-  aoExcluirSucesso,
-  aoExcluirErro,
-  tituloIconeExcluir,
-  botoesAdicionaisAcoesTabela,
-  deveExibirItemMenu,
-  mostrarBotoes = ['editar', 'excluir'],
-}: UseTabelaProps<T>) {
-  const snackbar = useSnackbar()
+  data,
+  extraColumns,
+  deleteMutation,
+  onEdit,
+  onView,
+  onDelete,
+  onDeleteSuccess,
+  onDeleteError,
+  deleteIconTitle,
+  additionalTableActionButtons,
+  shouldShowMenuItem,
+  showButtons = ['edit', 'delete'],
+}: UseTableProps<T>) {
+  // State
+  const [modalOpen, setModalOpen] = useState(false)
+  const [deletionId, setDeletionId] = useState<string | undefined>()
 
-  // Estado
-  const [modalAberta, setarModalAberta] = useState(false)
-  const [idExclusao, setarIdExclusao] = useState<string | undefined>()
-
-  async function visualizar(id: string) {
-    const itemParaVisualizar = dados.find(item => item.id === id)
-    if (!itemParaVisualizar) {
-      console.error('Item para visualizar não encontrado')
-      throw new Error('Item para visualizar não encontrado')
+  async function view(id: string) {
+    const itemToView = data.find(item => item.id === id)
+    if (!itemToView) {
+      console.error('Item to view not found')
+      throw new Error('Item to view not found')
     }
-    if (aoVisualizar) aoVisualizar(itemParaVisualizar)
+    if (onView) onView(itemToView)
   }
 
-  async function editar(id: string) {
-    const itemParaEditar = dados.find(item => item.id === id)
-    if (!itemParaEditar) {
-      throw new Error('Item para editar não encontrado')
+  async function edit(id: string) {
+    const itemToEdit = data.find(item => item.id === id)
+    if (!itemToEdit) {
+      throw new Error('Item to edit not found')
     }
-    if (aoEditar) aoEditar(itemParaEditar)
+    if (onEdit) onEdit(itemToEdit)
   }
 
-  async function excluir(id: string) {
+  async function deleteItem(id: string) {
     try {
-      await excluirMutation.mutateAsync({ id })
-      setarModalAberta(false)
-      setarIdExclusao(undefined)
-      if (aoExcluir) aoExcluir(id)
-      if (aoExcluirSucesso) aoExcluirSucesso()
+      await deleteMutation.mutateAsync({ id })
+      setModalOpen(false)
+      setDeletionId(undefined)
+      if (onDelete) onDelete(id)
+      if (onDeleteSuccess) onDeleteSuccess()
     } catch (error) {
-      if (aoExcluirErro) aoExcluirErro(error)
+      if (onDeleteError) onDeleteError(error)
     }
   }
 
-  function abrirModalExclusao(id: string) {
-    setarIdExclusao(id)
-    setarModalAberta(true)
+  function openDeleteModal(id: string) {
+    setDeletionId(id)
+    setModalOpen(true)
   }
 
-  const colunas: AccessorColumnDef<T, any>[] = [
-    ...colunasExtras,
+  const columns: AccessorColumnDef<T, any>[] = [
+    ...extraColumns,
     {
       accessorKey: 'id',
-      header: 'Ações',
+      header: 'Actions',
+      meta: {
+        dataType: 'icon',
+        alignment: 'center'
+      },
       cell: info => {
         const id = info.getValue() as string
-
         return (
           <ButtonActions
-            idItem={id}
-            visualizar={() => {
-              visualizar(id)
-            }}
-            editar={() => {
-              editar(id)
-            }}
-            excluir={() => {
-              abrirModalExclusao(id)
-            }}
-            estaPendenteExclusao={
-              excluirMutation.isPending && idExclusao === id
-            }
-            abrirModalExclusao={() => abrirModalExclusao(id)}
-            tituloIconeExcluir={tituloIconeExcluir}
-            botoesAdicionaisAcoesTabela={botoesAdicionaisAcoesTabela}
-            mostrarBotoes={mostrarBotoes}
-            deveExibirItemMenu={
-              deveExibirItemMenu ? () => deveExibirItemMenu(id) : undefined
+            itemId={id}
+            view={showButtons.includes('view') ? () => view(id) : undefined}
+            edit={showButtons.includes('edit') ? () => edit(id) : undefined}
+            delete={showButtons.includes('delete') ? () => openDeleteModal(id) : undefined}
+            isPendingDeletion={deleteMutation.isPending && deletionId === id}
+            openDeleteModal={() => openDeleteModal(id)}
+            deleteIconTitle={deleteIconTitle}
+            additionalTableActionButtons={additionalTableActionButtons}
+            showButtons={showButtons}
+            shouldShowMenuItem={
+              shouldShowMenuItem ? () => shouldShowMenuItem(id) : undefined
             }
           />
         )
@@ -114,11 +106,11 @@ export function useTable<T extends { id: string }>({
   ]
 
   return {
-    dados,
-    colunas,
-    modalAberta,
-    excluir,
-    setarModalAberta,
-    estaPendenteExcluir: excluirMutation.isPending,
+    data,
+    columns,
+    modalOpen,
+    delete: deleteItem,
+    setModalOpen,
+    isPendingDelete: deleteMutation.isPending,
   }
 }

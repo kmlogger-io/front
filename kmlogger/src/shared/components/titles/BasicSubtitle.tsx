@@ -3,45 +3,45 @@ import { cva } from 'class-variance-authority'
 import { twMerge } from 'tailwind-merge'
 import { Separator } from '../separator/Separator'
 
-const obterSeparadorVariantes = cva('', {
+const getSeparatorVariants = cva('', {
   variants: {
-    separador: {
+    separator: {
       default: 'bg-foreground/10',
     },
   },
   defaultVariants: {
-    separador: 'default',
+    separator: 'default',
   },
 })
 
 interface Props {
   'className'?: string
-  'classNameSeparador'?: string
-  'titulo': React.ReactNode
+  'separatorClassName'?: string
+  'title': React.ReactNode
   'data-testid'?: string
-  'comSeparador'?: boolean
-  'variantesSeparador'?: VariantProps<typeof obterSeparadorVariantes>
+  'withSeparator'?: boolean
+  'separatorVariants'?: VariantProps<typeof getSeparatorVariants>
 }
 
 function BasicSubtitle({
-  titulo,
+  title,
   className,
   'data-testid': dataTestId,
-  comSeparador,
-  variantesSeparador,
-  classNameSeparador,
+  withSeparator,
+  separatorVariants,
+  separatorClassName,
 }: Props) {
   return (
     <div
       data-testid={dataTestId}
       className={twMerge('hp text-xs sm:text-base sm:mb-0', className)}
     >
-      {titulo}
-      {comSeparador && (
+      {title}
+      {withSeparator && (
         <Separator
           className={twMerge(
-            obterSeparadorVariantes(variantesSeparador),
-            classNameSeparador
+            getSeparatorVariants(separatorVariants),
+            separatorClassName
           )}
         />
       )}

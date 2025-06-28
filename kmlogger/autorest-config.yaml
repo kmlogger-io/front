@@ -1,0 +1,20 @@
+input-file: src/client/swagger/api-spec.json
+output-folder: src/client
+language: typescript
+package-name: api-client
+package-version: 1.0.0
+
+generate-metadata: false
+add-credentials: true
+
+typescript:
+  optional-response-headers: false
+  strict-null-checks: true
+  model-date-time-as-string: true
+  override-client-name: ApiClient
+  azure-arm: false
+  property-naming: camelCase
+debug: true
+verbose: true
+use-datetimeoffset: false
+legacy: false

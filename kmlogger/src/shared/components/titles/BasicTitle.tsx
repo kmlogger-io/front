@@ -4,37 +4,37 @@ import { twMerge } from 'tailwind-merge'
 import { Separator } from '../separator/Separator'
 import BasicSubtitle from './BasicSubtitle'
 
-const obterSeparadorVariantes = cva('', {
+const getSeparatorVariants = cva('', {
   variants: {
-    separador: {
+    separator: {
       default: 'bg-foreground/10 mt-1 mb-5',
     },
   },
   defaultVariants: {
-    separador: 'default',
+    separator: 'default',
   },
 })
 
 interface Props {
   'className'?: string
-  'classNameSeparador'?: string
-  'titulo': React.ReactNode
-  'subtitulo'?: React.ReactNode
+  'separatorClassName'?: string
+  'title': React.ReactNode
+  'subtitle'?: React.ReactNode
   'data-testid'?: string
-  'comSeparador'?: boolean
-  'variantesSeparador'?: VariantProps<typeof obterSeparadorVariantes>
-  'tamanho'?: 'base' | 'sm'
+  'withSeparator'?: boolean
+  'separatorVariants'?: VariantProps<typeof getSeparatorVariants>
+  'size'?: 'base' | 'sm'
 }
 
-function TituloNightsable({
-  titulo,
+function BasicTitle({
+  title,
   className,
   'data-testid': dataTestId,
-  comSeparador,
-  variantesSeparador,
-  classNameSeparador,
-  tamanho,
-  subtitulo,
+  withSeparator,
+  separatorVariants,
+  separatorClassName,
+  size,
+  subtitle,
 }: Props) {
   return (
     <div
@@ -42,7 +42,7 @@ function TituloNightsable({
       className={twMerge(
         `
         ${
-          tamanho === 'sm'
+          size === 'sm'
             ? '~text-xs/base sm:~text-lg/xl'
             : '~text-base/base sm:~text-lg/2xl'
         }
@@ -50,13 +50,13 @@ function TituloNightsable({
         className
       )}
     >
-      {titulo}
-      {subtitulo && <BasicSubtitle titulo={subtitulo} />}
-      {comSeparador && (
+      {title}
+      {subtitle && <BasicSubtitle title={subtitle} />}
+      {withSeparator && (
         <Separator
           className={twMerge(
-            obterSeparadorVariantes(variantesSeparador),
-            classNameSeparador
+            getSeparatorVariants(separatorVariants),
+            separatorClassName
           )}
         />
       )}
@@ -64,4 +64,4 @@ function TituloNightsable({
   )
 }
 
-export default TituloNightsable
+export default BasicTitle
