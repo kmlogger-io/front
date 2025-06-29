@@ -725,6 +725,105 @@
         }
       }
     },
+    "/Role/GetAll": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "RoleGetAll",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_PaginatedResult_Domain_Records_DTOS_RoleDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/User/Login": {
       "post": {
         "tags": [
@@ -1037,6 +1136,90 @@
         }
       }
     },
+    "/User/Update": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "UserUpdate",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UseCases_User_Update_Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UseCases_User_Update_Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UseCases_User_Update_Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UseCases_User_Update_Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse_System_Object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/User/GetAll": {
       "get": {
         "tags": [
@@ -1058,6 +1241,27 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1107,7 +1311,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BaseResponse_List_Domain_Records_DTOS_UserDto"
+                  "$ref": "#/components/schemas/BaseResponse_PaginatedResult_Domain_Records_DTOS_UserDto"
                 }
               }
             }
@@ -1426,37 +1630,6 @@
   },
   "components": {
     "schemas": {
-      "BaseResponse_List_Domain_Records_DTOS_UserDto": {
-        "required": [
-          "statusCode",
-          "message",
-          "data",
-          "notifications"
-        ],
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Domain_Records_DTOS_UserDto"
-            }
-          },
-          "notifications": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            }
-          }
-        },
-        "additionalProperties": false
-      },
       "BaseResponse_List_UseCases_App_Read_ReadAll_Response": {
         "required": [
           "statusCode",
@@ -1571,6 +1744,62 @@
             "items": {
               "$ref": "#/components/schemas/UseCases_Log_Read_ReadByApp_Response"
             }
+          },
+          "notifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Flunt_Notifications_Notification"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "BaseResponse_PaginatedResult_Domain_Records_DTOS_RoleDto": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PaginatedResult_Domain_Records_DTOS_RoleDto"
+          },
+          "notifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Flunt_Notifications_Notification"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "BaseResponse_PaginatedResult_Domain_Records_DTOS_UserDto": {
+        "required": [
+          "statusCode",
+          "message",
+          "data",
+          "notifications"
+        ],
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PaginatedResult_Domain_Records_DTOS_UserDto"
           },
           "notifications": {
             "type": "array",
@@ -1924,35 +2153,6 @@
         },
         "additionalProperties": false
       },
-      "Domain_ValueObjects_FullName": {
-        "required": [
-          "notifications",
-          "isValid",
-          "firstName",
-          "lastName"
-        ],
-        "type": "object",
-        "properties": {
-          "notifications": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Flunt_Notifications_Notification"
-            },
-            "readOnly": true
-          },
-          "isValid": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
       "Flunt_Notifications_Notification": {
         "required": [
           "key",
@@ -1965,6 +2165,96 @@
           },
           "message": {
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaginatedResult_Domain_Records_DTOS_RoleDto": {
+        "required": [
+          "data",
+          "totalCount",
+          "page",
+          "pageSize",
+          "totalPages",
+          "hasNextPage",
+          "hasPreviousPage"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Domain_Records_DTOS_RoleDto"
+            }
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaginatedResult_Domain_Records_DTOS_UserDto": {
+        "required": [
+          "data",
+          "totalCount",
+          "page",
+          "pageSize",
+          "totalPages",
+          "hasNextPage",
+          "hasPreviousPage"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Domain_Records_DTOS_UserDto"
+            }
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -2382,14 +2672,18 @@
       },
       "UseCases_User_Register_Request": {
         "required": [
-          "fullName",
+          "firstName",
           "email",
           "rolesId"
         ],
         "type": "object",
         "properties": {
-          "fullName": {
-            "$ref": "#/components/schemas/Domain_ValueObjects_FullName"
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
           },
           "email": {
             "type": "string"
@@ -2406,6 +2700,35 @@
       },
       "UseCases_User_Register_Response": {
         "type": "object",
+        "additionalProperties": false
+      },
+      "UseCases_User_Update_Request": {
+        "required": [
+          "userId",
+          "rolesId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rolesId": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
         "additionalProperties": false
       }
     }

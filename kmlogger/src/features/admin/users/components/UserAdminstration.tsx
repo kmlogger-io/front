@@ -1,57 +1,116 @@
-import { Plus } from 'lucide-react'
-import { UserAdministrationFilters } from './UserAdministrationFilters'
-import { useUserAdministrationTable } from '../hooks/useUserAdministrationTable'
-import { Button } from '../../../../shared/components/button/button'
-import { BasicTable } from '../../../../shared/components/table/basic-table/components/BasicTable'
-import type { DomainRecordsDtosUserDto } from '../../../../client/src/models'
-import Box from '@mui/material/Box'
-import { PaginationProvider } from '../../../../shared/contexts/PaginationContext'
+import React from 'react';
+import {
+  Container,
+  Box,
+  Breadcrumbs,
+  Link,
+  Typography
+} from '@mui/material';
+import { Home, People } from '@mui/icons-material';
+import { RosterProvider } from '../../../../shared/components/table/roster';
+import { userEntity } from '../config/user-entity.config';
+import type { ModalCustomization } from '../../../../shared/components/table/roster/types/roster.types';
+import type { UserFormInput } from '../schemas/user.schema';
+import { useUserManagementComplete } from '../hooks/useUserManagmentComplete';
+import { UserFormField } from './UserFormField';
+import { RosterTableWithSearch } from '../../../../shared/components/table/roster/components/RosterTableWithSearch';
 
-export function UserAdministration() {
+export const UserManagementPageComplete: React.FC = () => {
   const {
-    data,
-    columns,
-    query,
-    filters,
-    setFilters,
-    handleViewUser,
-    handleDeleteUser,
-    deleteMutation
-  } = useUserAdministrationTable()
+    queryFunction,
+    mutations,
+    search
+  } = useUserManagementComplete();
+
+  const permissions = {
+    allowView: true,
+    allowEdit: true,
+    allowCreate: true,
+    allowDelete: true,
+    showDeleteModal: true
+  };
+
+  const customUserEntity = {
+    ...userEntity,
+    columns: userEntity.columns.filter(col =>
+      col.field !== 'id'
+    )
+  };
+
+  const modalCustomization: ModalCustomization<UserFormInput> = {
+    customFieldRenderer: (field, fieldState, column, disabled) => {
+      return (
+        <UserFormField
+          field={field}
+          fieldState={fieldState}
+          column={column}
+          disabled={disabled}
+        />
+      );
+    },
+    additionalFields: [
+      {
+        name: 'roleIds',
+        label: 'Perfis do Usuário',
+        required: true,
+        type: 'custom'
+      }
+    ],
+    fieldsToExclude: [],
+    modalTitles: {
+      create: 'Criar Novo Usuário',
+      edit: 'Editar Usuário',
+      view: 'Visualizar Usuário'
+    }
+  };
 
   return (
-    <PaginationProvider initialState={{ pageIndex: 0, itemsPerPage: 20 }}>
-    <Box className="space-y-6">
-      <Box className="flex flex-row items-center justify-between">
-        <h1 className="text-2xl font-bold">User Administration</h1>
-        <Button className="flex items-center gap-2">
-          <Plus className="h-4 w-4" />
-          Add User
-        </Button>
+    <Container maxWidth="xl" sx={{ py: 3 }}>
+      <Box sx={{ mb: 3 }}>
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link
+            underline="hover"
+            sx={{ display: 'flex', alignItems: 'center' }}
+            color="inherit"
+            href="/"
+          >
+            <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+            Início
+          </Link>
+          <Typography
+            sx={{ display: 'flex', alignItems: 'center' }}
+            color="text.primary"
+          >
+            <People sx={{ mr: 0.5 }} fontSize="inherit" />
+            Gerenciamento de Usuários
+          </Typography>
+        </Breadcrumbs>
       </Box>
-
-      <UserAdministrationFilters
-        filters={filters}
-        onFiltersChange={setFilters}
-      />
-      
-      <BasicTable<DomainRecordsDtosUserDto>
-        data-testid="user-administration-table"
-        data={data}
-        extraColumns={columns}
-        query={query}
-        onView={handleViewUser}
-        onDelete={handleDeleteUser}
-        deleteMutation={deleteMutation}
-        showButtons={['view', 'delete']} 
-        deleteIconTitle="Delete User"
-        className="w-full"
-        loadingQueryClassName="min-h-[400px]"
-        showPagination={true}
-        shouldRenderCompact={false}
-      />
-    </Box>
-     </PaginationProvider>
-    
-  )
-}
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Gerenciamento de Usuários
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Gerencie usuários, perfis e permissões do sistema
+        </Typography>
+      </Box>
+      <RosterProvider>
+        <Box sx={{ height: '70vh' }}>
+          <RosterTableWithSearch
+            entity={customUserEntity}
+            queryFunction={queryFunction}
+            permissions={permissions}
+            mutations={mutations}
+            modalCustomization={modalCustomization}
+            title="Lista de Usuários"
+            subtitle="Gerencie todos os usuários do sistema"
+            searchPlaceholder="Buscar por nome ou email..."
+            onSearch={search.handleSearchChange}
+            searchValue={search.searchTerm}
+            initialPageSize={25}
+          />
+        </Box>
+      </RosterProvider>
+    </Container>
+  );
+};

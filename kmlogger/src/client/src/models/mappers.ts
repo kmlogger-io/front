@@ -852,6 +852,147 @@ export const UseCasesLogReadByIdResponse: coreClient.CompositeMapper = {
   },
 };
 
+export const BaseResponsePaginatedResultDomainRecordsDtosRoleDto: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponsePaginatedResultDomainRecordsDtosRoleDto",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          required: true,
+          type: {
+            name: "String",
+          },
+        },
+        data: {
+          serializedName: "data",
+          type: {
+            name: "Composite",
+            className: "PaginatedResultDomainRecordsDtosRoleDto",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          required: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
+export const PaginatedResultDomainRecordsDtosRoleDto: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "PaginatedResultDomainRecordsDtosRoleDto",
+      modelProperties: {
+        data: {
+          serializedName: "data",
+          required: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "DomainRecordsDtosRoleDto",
+              },
+            },
+          },
+        },
+        totalCount: {
+          serializedName: "totalCount",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        page: {
+          serializedName: "page",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        pageSize: {
+          serializedName: "pageSize",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        totalPages: {
+          serializedName: "totalPages",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        hasNextPage: {
+          serializedName: "hasNextPage",
+          required: true,
+          readOnly: true,
+          type: {
+            name: "Boolean",
+          },
+        },
+        hasPreviousPage: {
+          serializedName: "hasPreviousPage",
+          required: true,
+          readOnly: true,
+          type: {
+            name: "Boolean",
+          },
+        },
+      },
+    },
+  };
+
+export const DomainRecordsDtosRoleDto: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "DomainRecordsDtosRoleDto",
+    modelProperties: {
+      id: {
+        serializedName: "id",
+        required: true,
+        type: {
+          name: "String",
+        },
+      },
+      name: {
+        serializedName: "name",
+        required: true,
+        type: {
+          name: "String",
+        },
+      },
+      slug: {
+        serializedName: "slug",
+        required: true,
+        type: {
+          name: "String",
+        },
+      },
+    },
+  },
+};
+
 export const UseCasesUserLoginRequest: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -1176,11 +1317,18 @@ export const UseCasesUserRegisterRequest: coreClient.CompositeMapper = {
     name: "Composite",
     className: "UseCasesUserRegisterRequest",
     modelProperties: {
-      fullName: {
-        serializedName: "fullName",
+      firstName: {
+        serializedName: "firstName",
+        required: true,
         type: {
-          name: "Composite",
-          className: "DomainValueObjectsFullName",
+          name: "String",
+        },
+      },
+      lastName: {
+        serializedName: "lastName",
+        nullable: true,
+        type: {
+          name: "String",
         },
       },
       email: {
@@ -1200,51 +1348,6 @@ export const UseCasesUserRegisterRequest: coreClient.CompositeMapper = {
               name: "Uuid",
             },
           },
-        },
-      },
-    },
-  },
-};
-
-export const DomainValueObjectsFullName: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "DomainValueObjectsFullName",
-    modelProperties: {
-      notifications: {
-        serializedName: "notifications",
-        required: true,
-        readOnly: true,
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "FluntNotificationsNotification",
-            },
-          },
-        },
-      },
-      isValid: {
-        serializedName: "isValid",
-        required: true,
-        readOnly: true,
-        type: {
-          name: "Boolean",
-        },
-      },
-      firstName: {
-        serializedName: "firstName",
-        required: true,
-        type: {
-          name: "String",
-        },
-      },
-      lastName: {
-        serializedName: "lastName",
-        required: true,
-        type: {
-          name: "String",
         },
       },
     },
@@ -1296,11 +1399,53 @@ export const BaseResponseUseCasesUserRegisterResponse: coreClient.CompositeMappe
     },
   };
 
-export const BaseResponseListDomainRecordsDtosUserDto: coreClient.CompositeMapper =
+export const UseCasesUserUpdateRequest: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "UseCasesUserUpdateRequest",
+    modelProperties: {
+      userId: {
+        serializedName: "userId",
+        required: true,
+        type: {
+          name: "Uuid",
+        },
+      },
+      rolesId: {
+        serializedName: "rolesId",
+        required: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Uuid",
+            },
+          },
+        },
+      },
+      firstName: {
+        serializedName: "firstName",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      lastName: {
+        serializedName: "lastName",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+    },
+  },
+};
+
+export const BaseResponsePaginatedResultDomainRecordsDtosUserDto: coreClient.CompositeMapper =
   {
     type: {
       name: "Composite",
-      className: "BaseResponseListDomainRecordsDtosUserDto",
+      className: "BaseResponsePaginatedResultDomainRecordsDtosUserDto",
       modelProperties: {
         statusCode: {
           serializedName: "statusCode",
@@ -1318,15 +1463,9 @@ export const BaseResponseListDomainRecordsDtosUserDto: coreClient.CompositeMappe
         },
         data: {
           serializedName: "data",
-          required: true,
           type: {
-            name: "Sequence",
-            element: {
-              type: {
-                name: "Composite",
-                className: "DomainRecordsDtosUserDto",
-              },
-            },
+            name: "Composite",
+            className: "PaginatedResultDomainRecordsDtosUserDto",
           },
         },
         notifications: {
@@ -1340,6 +1479,73 @@ export const BaseResponseListDomainRecordsDtosUserDto: coreClient.CompositeMappe
                 className: "FluntNotificationsNotification",
               },
             },
+          },
+        },
+      },
+    },
+  };
+
+export const PaginatedResultDomainRecordsDtosUserDto: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "PaginatedResultDomainRecordsDtosUserDto",
+      modelProperties: {
+        data: {
+          serializedName: "data",
+          required: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "DomainRecordsDtosUserDto",
+              },
+            },
+          },
+        },
+        totalCount: {
+          serializedName: "totalCount",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        page: {
+          serializedName: "page",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        pageSize: {
+          serializedName: "pageSize",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        totalPages: {
+          serializedName: "totalPages",
+          required: true,
+          type: {
+            name: "Number",
+          },
+        },
+        hasNextPage: {
+          serializedName: "hasNextPage",
+          required: true,
+          readOnly: true,
+          type: {
+            name: "Boolean",
+          },
+        },
+        hasPreviousPage: {
+          serializedName: "hasPreviousPage",
+          required: true,
+          readOnly: true,
+          type: {
+            name: "Boolean",
           },
         },
       },
@@ -1397,36 +1603,6 @@ export const DomainRecordsDtosUserDto: coreClient.CompositeMapper = {
         required: true,
         type: {
           name: "Boolean",
-        },
-      },
-    },
-  },
-};
-
-export const DomainRecordsDtosRoleDto: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "DomainRecordsDtosRoleDto",
-    modelProperties: {
-      id: {
-        serializedName: "id",
-        required: true,
-        type: {
-          name: "String",
-        },
-      },
-      name: {
-        serializedName: "name",
-        required: true,
-        type: {
-          name: "String",
-        },
-      },
-      slug: {
-        serializedName: "slug",
-        required: true,
-        type: {
-          name: "String",
         },
       },
     },

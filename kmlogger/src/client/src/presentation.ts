@@ -23,6 +23,8 @@ import {
   LogReadByAppResponse,
   LogReadByIdOptionalParams,
   LogReadByIdResponse,
+  RoleGetAllOptionalParams,
+  RoleGetAllResponse,
   UserLoginOptionalParams,
   UserLoginResponse,
   UserRefreshTokenOptionalParams,
@@ -31,6 +33,8 @@ import {
   UserLogoutResponse,
   UserRegisterOptionalParams,
   UserRegisterResponse,
+  UserUpdateOptionalParams,
+  UserUpdateResponse,
   UserGetAllOptionalParams,
   UserGetAllResponse,
   UserDeleteOptionalParams,
@@ -186,6 +190,11 @@ export class Presentation extends coreClient.ServiceClient {
   }
 
   /** @param options The options parameters. */
+  roleGetAll(options?: RoleGetAllOptionalParams): Promise<RoleGetAllResponse> {
+    return this.sendOperationRequest({ options }, roleGetAllOperationSpec);
+  }
+
+  /** @param options The options parameters. */
   userLogin(options?: UserLoginOptionalParams): Promise<UserLoginResponse> {
     return this.sendOperationRequest({ options }, userLoginOperationSpec);
   }
@@ -210,6 +219,11 @@ export class Presentation extends coreClient.ServiceClient {
     options?: UserRegisterOptionalParams,
   ): Promise<UserRegisterResponse> {
     return this.sendOperationRequest({ options }, userRegisterOperationSpec);
+  }
+
+  /** @param options The options parameters. */
+  userUpdate(options?: UserUpdateOptionalParams): Promise<UserUpdateResponse> {
+    return this.sendOperationRequest({ options }, userUpdateOperationSpec);
   }
 
   /** @param options The options parameters. */
@@ -489,6 +503,37 @@ const logReadByIdOperationSpec: coreClient.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer,
 };
+const roleGetAllOperationSpec: coreClient.OperationSpec = {
+  path: "/Role/GetAll",
+  httpMethod: "GET",
+  responses: {
+    200: {
+      bodyMapper: Mappers.BaseResponsePaginatedResultDomainRecordsDtosRoleDto,
+    },
+    400: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    401: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    403: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    500: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+  },
+  queryParameters: [
+    Parameters.page,
+    Parameters.pageSize,
+    Parameters.search,
+    Parameters.sortBy,
+    Parameters.sortOrder,
+  ],
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.accept],
+  serializer,
+};
 const userLoginOperationSpec: coreClient.OperationSpec = {
   path: "/User/Login",
   httpMethod: "POST",
@@ -591,12 +636,12 @@ const userRegisterOperationSpec: coreClient.OperationSpec = {
   mediaType: "json",
   serializer,
 };
-const userGetAllOperationSpec: coreClient.OperationSpec = {
-  path: "/User/GetAll",
-  httpMethod: "GET",
+const userUpdateOperationSpec: coreClient.OperationSpec = {
+  path: "/User/Update",
+  httpMethod: "PUT",
   responses: {
     200: {
-      bodyMapper: Mappers.BaseResponseListDomainRecordsDtosUserDto,
+      bodyMapper: Mappers.BaseResponseSystemObject,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -611,7 +656,39 @@ const userGetAllOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.BaseResponseSystemObject,
     },
   },
-  queryParameters: [Parameters.page, Parameters.pageSize],
+  requestBody: Parameters.body6,
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.contentType, Parameters.accept],
+  mediaType: "json",
+  serializer,
+};
+const userGetAllOperationSpec: coreClient.OperationSpec = {
+  path: "/User/GetAll",
+  httpMethod: "GET",
+  responses: {
+    200: {
+      bodyMapper: Mappers.BaseResponsePaginatedResultDomainRecordsDtosUserDto,
+    },
+    400: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    401: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    403: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+    500: {
+      bodyMapper: Mappers.BaseResponseSystemObject,
+    },
+  },
+  queryParameters: [
+    Parameters.page,
+    Parameters.pageSize,
+    Parameters.search,
+    Parameters.sortBy,
+    Parameters.sortOrder,
+  ],
   urlParameters: [Parameters.$host],
   headerParameters: [Parameters.accept],
   serializer,
@@ -661,7 +738,7 @@ const userCompleteRegistrationOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.BaseResponseSystemObject,
     },
   },
-  requestBody: Parameters.body6,
+  requestBody: Parameters.body7,
   urlParameters: [Parameters.$host],
   headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",

@@ -148,6 +148,31 @@ export interface UseCasesLogReadByIdResponse {
   createdDate: Date;
 }
 
+export interface BaseResponsePaginatedResultDomainRecordsDtosRoleDto {
+  statusCode: number;
+  message: string;
+  data: PaginatedResultDomainRecordsDtosRoleDto;
+  notifications: FluntNotificationsNotification[];
+}
+
+export interface PaginatedResultDomainRecordsDtosRoleDto {
+  data: DomainRecordsDtosRoleDto[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  /** NOTE: This property will not be serialized. It can only be populated by the server. */
+  readonly hasNextPage: boolean;
+  /** NOTE: This property will not be serialized. It can only be populated by the server. */
+  readonly hasPreviousPage: boolean;
+}
+
+export interface DomainRecordsDtosRoleDto {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 export interface UseCasesUserLoginRequest {
   email: string;
   password: string;
@@ -207,18 +232,10 @@ export interface UseCasesUserLogoutResponse {
 }
 
 export interface UseCasesUserRegisterRequest {
-  fullName: DomainValueObjectsFullName;
+  firstName: string;
+  lastName?: string;
   email: string;
   rolesId: string[];
-}
-
-export interface DomainValueObjectsFullName {
-  /** NOTE: This property will not be serialized. It can only be populated by the server. */
-  readonly notifications: FluntNotificationsNotification[];
-  /** NOTE: This property will not be serialized. It can only be populated by the server. */
-  readonly isValid: boolean;
-  firstName: string;
-  lastName: string;
 }
 
 export interface BaseResponseUseCasesUserRegisterResponse {
@@ -229,11 +246,30 @@ export interface BaseResponseUseCasesUserRegisterResponse {
   notifications: FluntNotificationsNotification[];
 }
 
-export interface BaseResponseListDomainRecordsDtosUserDto {
+export interface UseCasesUserUpdateRequest {
+  userId: string;
+  rolesId: string[];
+  firstName?: string;
+  lastName?: string;
+}
+
+export interface BaseResponsePaginatedResultDomainRecordsDtosUserDto {
   statusCode: number;
   message: string;
-  data: DomainRecordsDtosUserDto[];
+  data: PaginatedResultDomainRecordsDtosUserDto;
   notifications: FluntNotificationsNotification[];
+}
+
+export interface PaginatedResultDomainRecordsDtosUserDto {
+  data: DomainRecordsDtosUserDto[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  /** NOTE: This property will not be serialized. It can only be populated by the server. */
+  readonly hasNextPage: boolean;
+  /** NOTE: This property will not be serialized. It can only be populated by the server. */
+  readonly hasPreviousPage: boolean;
 }
 
 export interface DomainRecordsDtosUserDto {
@@ -243,12 +279,6 @@ export interface DomainRecordsDtosUserDto {
   createdAt: Date;
   roles: DomainRecordsDtosRoleDto[];
   active: boolean;
-}
-
-export interface DomainRecordsDtosRoleDto {
-  id: string;
-  name: string;
-  slug: string;
 }
 
 export interface UseCasesUserCompleteRegistrationRequest {
@@ -364,6 +394,19 @@ export interface LogReadByIdOptionalParams extends coreClient.OperationOptions {
 export type LogReadByIdResponse = BaseResponseUseCasesLogReadByIdResponse;
 
 /** Optional parameters. */
+export interface RoleGetAllOptionalParams extends coreClient.OperationOptions {
+  page?: number;
+  pageSize?: number;
+  search?: string;
+  sortBy?: string;
+  sortOrder?: string;
+}
+
+/** Contains response data for the roleGetAll operation. */
+export type RoleGetAllResponse =
+  BaseResponsePaginatedResultDomainRecordsDtosRoleDto;
+
+/** Optional parameters. */
 export interface UserLoginOptionalParams extends coreClient.OperationOptions {
   body?: UseCasesUserLoginRequest;
 }
@@ -397,13 +440,25 @@ export interface UserRegisterOptionalParams
 export type UserRegisterResponse = BaseResponseUseCasesUserRegisterResponse;
 
 /** Optional parameters. */
+export interface UserUpdateOptionalParams extends coreClient.OperationOptions {
+  body?: UseCasesUserUpdateRequest;
+}
+
+/** Contains response data for the userUpdate operation. */
+export type UserUpdateResponse = BaseResponseSystemObject;
+
+/** Optional parameters. */
 export interface UserGetAllOptionalParams extends coreClient.OperationOptions {
   page?: number;
   pageSize?: number;
+  search?: string;
+  sortBy?: string;
+  sortOrder?: string;
 }
 
 /** Contains response data for the userGetAll operation. */
-export type UserGetAllResponse = BaseResponseListDomainRecordsDtosUserDto;
+export type UserGetAllResponse =
+  BaseResponsePaginatedResultDomainRecordsDtosUserDto;
 
 /** Optional parameters. */
 export interface UserDeleteOptionalParams extends coreClient.OperationOptions {

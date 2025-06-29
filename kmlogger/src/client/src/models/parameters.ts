@@ -10,6 +10,7 @@ import {
   UseCasesUserLoginRequest as UseCasesUserLoginRequestMapper,
   UseCasesUserRefreshTokenRequest as UseCasesUserRefreshTokenRequestMapper,
   UseCasesUserRegisterRequest as UseCasesUserRegisterRequestMapper,
+  UseCasesUserUpdateRequest as UseCasesUserUpdateRequestMapper,
   UseCasesUserCompleteRegistrationRequest as UseCasesUserCompleteRegistrationRequestMapper,
 } from "../models/mappers.js";
 
@@ -144,21 +145,6 @@ export const id1: OperationQueryParameter = {
   },
 };
 
-export const body3: OperationParameter = {
-  parameterPath: ["options", "body"],
-  mapper: UseCasesUserLoginRequestMapper,
-};
-
-export const body4: OperationParameter = {
-  parameterPath: ["options", "body"],
-  mapper: UseCasesUserRefreshTokenRequestMapper,
-};
-
-export const body5: OperationParameter = {
-  parameterPath: ["options", "body"],
-  mapper: UseCasesUserRegisterRequestMapper,
-};
-
 export const page: OperationQueryParameter = {
   parameterPath: ["options", "page"],
   mapper: {
@@ -179,7 +165,57 @@ export const pageSize: OperationQueryParameter = {
   },
 };
 
+export const search: OperationQueryParameter = {
+  parameterPath: ["options", "search"],
+  mapper: {
+    serializedName: "Search",
+    type: {
+      name: "String",
+    },
+  },
+};
+
+export const sortBy: OperationQueryParameter = {
+  parameterPath: ["options", "sortBy"],
+  mapper: {
+    serializedName: "SortBy",
+    type: {
+      name: "String",
+    },
+  },
+};
+
+export const sortOrder: OperationQueryParameter = {
+  parameterPath: ["options", "sortOrder"],
+  mapper: {
+    serializedName: "SortOrder",
+    type: {
+      name: "String",
+    },
+  },
+};
+
+export const body3: OperationParameter = {
+  parameterPath: ["options", "body"],
+  mapper: UseCasesUserLoginRequestMapper,
+};
+
+export const body4: OperationParameter = {
+  parameterPath: ["options", "body"],
+  mapper: UseCasesUserRefreshTokenRequestMapper,
+};
+
+export const body5: OperationParameter = {
+  parameterPath: ["options", "body"],
+  mapper: UseCasesUserRegisterRequestMapper,
+};
+
 export const body6: OperationParameter = {
+  parameterPath: ["options", "body"],
+  mapper: UseCasesUserUpdateRequestMapper,
+};
+
+export const body7: OperationParameter = {
   parameterPath: ["options", "body"],
   mapper: UseCasesUserCompleteRegistrationRequestMapper,
 };

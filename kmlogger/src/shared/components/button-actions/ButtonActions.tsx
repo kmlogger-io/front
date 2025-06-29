@@ -6,7 +6,7 @@ import {
   IconPencil,
   IconTrash,
 } from '@tabler/icons-react'
-import { useMenu } from '../../../../hooks/useMenu.hook'
+import { useMenu } from '../../hooks/useMenu.hook'
 
 type ButtonType = 'view' | 'edit' | 'delete'
 
